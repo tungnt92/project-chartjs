@@ -1,6 +1,6 @@
 # Project-chartjs
 
-[![Build Status](https://travis-ci.com/tungnt92/project-chartjs.svg?branch=master)](https://travis-ci.org/tungnt92/project-chartjs) [![dependencies Status](https://david-dm.org/tungnt92/project-chartjs/status.svg)](https://david-dm.org/tungnt92/project-chartjs) [![devDependencies Status](https://david-dm.org/tungnt92/project-chartjs/dev-status.svg)](https://david-dm.org/tungnt92/project-chartjs?type=dev) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.com/tungnt92/project-chartjs.svg?branch=master)](https://travis-ci.com/tungnt92/project-chartjs) [![dependencies Status](https://david-dm.org/tungnt92/project-chartjs/status.svg)](https://david-dm.org/tungnt92/project-chartjs) [![devDependencies Status](https://david-dm.org/tungnt92/project-chartjs/dev-status.svg)](https://david-dm.org/tungnt92/project-chartjs?type=dev) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 Happy hacking =)
 
