@@ -4,6 +4,12 @@
 
 Happy hacking =)
 
+# Require
+```
+$ node -v
+v14.4.0
+```
+
 # Features
 
 * **ES6/ESNext** - Write _ES6_ code and _Babel_ will transpile it to ES5 for backwards compatibility
