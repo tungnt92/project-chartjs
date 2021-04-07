@@ -1,12 +1,13 @@
 const path = require('path');
 const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 // App directory
 const appDirectory = fs.realpathSync(process.cwd());
 
 // Gets absolute path of file within app directory
-const resolveAppPath = relativePath => path.resolve(appDirectory, relativePath);
+const resolveAppPath = (relativePath) => path.resolve(appDirectory, relativePath);
 
 // Host
 const host = process.env.HOST || 'localhost';
@@ -17,6 +18,13 @@ process.env.NODE_ENV = 'development';
 module.exports = {
   mode: 'development',
   entry: resolveAppPath('src'),
+  module: {
+    rules: [
+      { test: /\.js$/, use: 'babel-loader' },
+      { test: /\.vue$/, use: 'vue-loader' },
+      { test: /\.css$/, use: ['vue-style-loader', 'css-loader'] },
+    ]
+  },
   output: {
     // Development filename output
     filename: 'build/bundle.js',
@@ -29,6 +37,7 @@ module.exports = {
       inject: true,
       template: resolveAppPath('src/index.html'),
     }),
+    new VueLoaderPlugin(),
   ],
   devServer: {
     contentBase: resolveAppPath('src'),
