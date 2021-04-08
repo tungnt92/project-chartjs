@@ -16,13 +16,22 @@ const host = process.env.HOST || 'localhost';
 process.env.NODE_ENV = 'development';
 
 module.exports = {
+  target: 'web',
   mode: 'development',
-  entry: resolveAppPath('src'),
+  entry: resolveAppPath('src/main.js'),
   module: {
     rules: [
-      { test: /\.js$/, use: 'babel-loader' },
+      // { test: /\.js$/, use: 'babel-loader' },
       { test: /\.vue$/, use: 'vue-loader' },
       { test: /\.css$/, use: ['vue-style-loader', 'css-loader'] },
+      {
+        test: /\.scss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
+      }
     ]
   },
   output: {
