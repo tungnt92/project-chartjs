@@ -68,6 +68,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "moment": "^2.29.1"
+    "moment": "^2.29.1",
+    "ant-design-vue": "^1.7.4"
   }
 }

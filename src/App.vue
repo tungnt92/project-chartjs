@@ -192,8 +192,9 @@
   }
 
   .chart {
-    width: 900px;
+    width: 1000px;
     margin: auto;
+    padding: 30px 0;
     &__container {
       display: flex;
       .left {
