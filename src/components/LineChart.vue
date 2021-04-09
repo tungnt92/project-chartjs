@@ -24,9 +24,6 @@
         </div>
       </div>
     </div>
-
-    <p>start : {{ periodStart }} -----
-      end : {{ periodStart }}</p>
   </div>
 </template>
 
@@ -64,17 +61,17 @@
 
 <style lang="scss" scoped>
   .line {
-    margin-top: 63px;
+    margin-top: 71px;
     &__project {
-      margin-bottom: 83px;
+      margin-bottom: 88px;
     }
     &__position {
-      margin-bottom: 36px;
+      margin-bottom: 41px;
     }
     &__member {
       position: relative;
       display: flex;
-      margin-bottom: 9px;
+      margin-bottom: 10px;
       height: 18px;
     }
     &__work {

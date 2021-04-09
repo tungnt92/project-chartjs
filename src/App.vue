@@ -191,6 +191,10 @@
     box-sizing: border-box;
   }
 
+  html, body {
+    line-height: inherit;
+  }
+
   .chart {
     width: 1000px;
     margin: auto;

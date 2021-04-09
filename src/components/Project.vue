@@ -66,6 +66,7 @@
             list-style: none;
             padding-left: 15px;
             margin-bottom: 10px;
+            line-height: 1.3;
           }
         }
       }
