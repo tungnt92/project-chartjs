@@ -1,12 +1,17 @@
 <template>
   <div>
     <div class="project" v-for="(project, index) in data.projects" :key="index">
-      <h3 class="item__name" v-text="project.name" />
+      <h3 class="project__name" v-text="project.name" />
+
       <ul class="project__list" >
-        <li class="project__item" v-for="(item, index) in project.position" :key="index">
-          <p>. {{ item.members.length }} {{ item.name }}</p>
+        <li class="list__item" v-for="(item, index) in project.position" :key="index">
+          <p v-text="`. ${item.members.length} ${ item.name}`" />
+
           <ul class="item__member-list">
-            <li v-for="(member, i) in item.members" :key="i" class="member__item" v-text="`+ ${member.name} (${findWorkStatus(member.work)})`" />
+            <li v-for="(member, i) in item.members"
+                :key="i" class="member__item"
+                v-text="`+ ${member.name} (${findWorkStatus(member.work)})`"
+            />
           </ul>
         </li>
       </ul>
@@ -49,15 +54,11 @@
   margin: 0;
   list-style: none;
 
-  .item__name {
-    margin: 0 0 10px;
-  }
-
   p {
     margin: 0 0 10px;
   }
 
-  .project__item {
+  .list__item {
     &:not(:last-child) {
       margin-bottom: 10px;
     }

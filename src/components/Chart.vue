@@ -1,10 +1,15 @@
 <template>
   <div class="chart">
-    <ul class="chart__list" v-for="project in data.projects">
-      <li  v-for="item in project.position" class="chart__item">
+    <ul class="chart__list"
+        v-for="(project, index) in data.projects"
+        :key="index"
+    >
+      <li v-for="(item, i) in project.position"
+          :key="i" class="chart__item"
+      >
         <ul class="item__member-list">
-          <Bar v-for="(member, index) in item.members"
-               :key="index"
+          <Bar v-for="(member, ind) in item.members"
+               :key="ind"
                :data="member.work"
                :bg-color="member.bg_color"
                :start-day="data.start_time"

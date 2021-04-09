@@ -2,7 +2,8 @@
   <div class="search">
     <div class="search-left">
       <div class="period-start date-pick">
-        <label>Period Start</label>
+        <label v-text="'Period Start'" />
+
         <a-date-picker
           v-model="form.period_start"
           :disabled-date="disabledStartDate"
@@ -11,7 +12,8 @@
         />
       </div>
       <div class="period-end date-pick">
-        <label>Period End</label>
+        <label v-text="'Period End'" />
+
         <a-date-picker
           v-model="form.period_end"
           :disabled-date="disabledEndDate"
@@ -19,8 +21,10 @@
           placeholder="dd/mm/yyyy"
         />
       </div>
+
       <div class="list-project">
-        <label>Project</label>
+        <label v-text="'Project'" />
+
         <a-select style="width: 160px" placeholder="Project name">
           <a-select-option value="Newphoria">
             Newphoria
@@ -32,9 +36,9 @@
       </div>
     </div>
     <div class="search-right">
-      <button><</button>
-      <button class="btn-today">TODAY</button>
-      <button>></button>
+      <button v-text="'<'" />
+      <button class="btn-today" v-text="'TODAY'" />
+      <button v-text="'>'" />
     </div>
   </div>
 </template>
@@ -45,8 +49,10 @@
   import 'ant-design-vue/dist/antd.css';
   Vue.use(DatePicker);
   Vue.use(Select);
+
   export default {
     name: "Search",
+
     data () {
       return {
         form: {
@@ -56,6 +62,7 @@
         }
       }
     },
+
     methods: {
       disabledStartDate(startValue) {
         const endValue = this.form.period_end;
@@ -66,6 +73,7 @@
         }
         return startValue.valueOf() > monthBefore.valueOf();
       },
+
       disabledEndDate(endValue) {
         const startValue = this.form.period_start;
         const monthAfter =  new Date(this.form.period_start);

@@ -1,16 +1,19 @@
 <template>
   <div class="table-wrap">
     <div class="project-col">
-      <p class="project__title">Project</p>
-      <div ref="project" class="project-wrap" @scroll="scroll">
-        <Project :data="data" @scroll="scroll"/>
+      <h4 class="project__title" v-text="'Project'" />
+
+      <div class="project-wrap">
+        <Project :data="data"/>
       </div>
     </div>
+
     <div class="chart-col">
       <div class="chart__timeline">
         <Duration :start-date="data.start_time"/>
       </div>
-      <div ref="chart" class="chart__wrap" @scroll="scroll">
+
+      <div class="chart__wrap">
         <Chart :data="data"/>
       </div>
     </div>
@@ -34,19 +37,8 @@ export default {
 
   data () {
     return {
-      data: Projects,
-      scrollAmount: 0
+      data: Projects
     }
-  },
-
-  methods: {
-    scroll ({target: {scrollTop}}) {
-      this.scrollAmount = scrollTop
-    }
-  },
-
-  mounted() {
-
   }
 };
 </script>

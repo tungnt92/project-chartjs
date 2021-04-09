@@ -1,8 +1,8 @@
 <template>
   <div class="duration">
     <ul>
-      <li v-for="date in durations" :style="{'width': date.days*10 + 'px'}">
-        <span v-text="date.date" />
+      <li v-for="(date, index) in durations" :style="{'width': date.days*10 + 'px'}">
+        <span :key="index" v-text="date.date" />
       </li>
     </ul>
   </div>
