@@ -1,6 +1,6 @@
 {
-  "startTime": "2020-04-06",
-  "endTime": "2020-05-06",
+  "start_time": "2020-04-09",
+  "end_time": "2020-05-06",
   "projects": [
     {
       "id": 1,
@@ -12,15 +12,16 @@
             {
               "id": 1,
               "name": "Tun",
+              "bg_color": "#eb4034",
               "work": [
                 {
-                  "joinDate": "2020-04-06",
-                  "leaveDate": null,
+                  "join_date": "2020-04-04",
+                  "leave_date": "2020-04-16",
                   "work_status": 1
                 },
                 {
-                  "joinDate": "2020-04-16",
-                  "leaveDate": null,
+                  "join_date": "2020-05-06",
+                  "leave_date": "2020-05-16",
                   "work_status": 0.5
                 }
               ]
@@ -28,15 +29,33 @@
             {
               "id": 2,
               "name": "Tim",
+              "bg_color": "#ebeb34",
               "work": [
                 {
-                  "joinDate": "2020-04-06",
-                  "leaveDate": null,
+                  "join_date": "2020-04-06",
+                  "leave_date": "2020-05-06",
                   "work_status": 1
                 },
                 {
-                  "joinDate": "2020-04-16",
-                  "leaveDate": null,
+                  "join_date": "2020-05-06",
+                  "leave_date": "2020-05-16",
+                  "work_status": 0.5
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "name": "Kuro",
+              "bg_color": "#eba234",
+              "work": [
+                {
+                  "join_date": "2020-04-06",
+                  "leave_date": "2020-05-06",
+                  "work_status": 1
+                },
+                {
+                  "join_date": "2020-05-06",
+                  "leave_date": "2020-05-16",
                   "work_status": 0.5
                 }
               ]
@@ -49,15 +68,16 @@
             {
               "id": 1,
               "name": "Tun",
+              "bg_color": "#7deb34",
               "work": [
                 {
-                  "joinDate": "2020-04-06",
-                  "leaveDate": null,
+                  "join_date": "2020-04-06",
+                  "leave_date": "2020-05-06",
                   "work_status": 1
                 },
                 {
-                  "joinDate": "2020-04-16",
-                  "leaveDate": null,
+                  "join_date": "2020-05-06",
+                  "leave_date": "2020-05-26",
                   "work_status": 0.5
                 }
               ]
@@ -65,15 +85,16 @@
             {
               "id": 2,
               "name": "Tim",
+              "bg_color": "#34d3eb",
               "work": [
                 {
-                  "joinDate": "2020-04-06",
-                  "leaveDate": null,
+                  "join_date": "2020-04-06",
+                  "leave_date": "2020-05-06",
                   "work_status": 1
                 },
                 {
-                  "joinDate": "2020-04-16",
-                  "leaveDate": null,
+                  "join_date": "2020-05-06",
+                  "leave_date": "2020-05-20",
                   "work_status": 0.5
                 }
               ]
@@ -92,15 +113,16 @@
             {
               "id": 1,
               "name": "Tun",
+              "bg_color": "#3477eb",
               "work": [
                 {
-                  "joinDate": "2020-04-06",
-                  "leaveDate": null,
+                  "join_date": "2020-04-06",
+                  "leave_date": "2020-04-26",
                   "work_status": 1
                 },
                 {
-                  "joinDate": "2020-04-16",
-                  "leaveDate": null,
+                  "join_date": "2020-04-26",
+                  "leave_date": "2020-05-06",
                   "work_status": 0.5
                 }
               ]
@@ -108,15 +130,16 @@
             {
               "id": 2,
               "name": "Tim",
+              "bg_color": "#6e34eb",
               "work": [
                 {
-                  "joinDate": "2020-04-06",
-                  "leaveDate": null,
+                  "join_date": "2020-04-06",
+                  "leave_date": "2020-04-20",
                   "work_status": 1
                 },
                 {
-                  "joinDate": "2020-04-16",
-                  "leaveDate": null,
+                  "join_date": "2020-04-20",
+                  "leave_date": "2020-05-26",
                   "work_status": 0.5
                 }
               ]
@@ -129,15 +152,16 @@
             {
               "id": 1,
               "name": "Tun",
+              "bg_color": "#b734eb",
               "work": [
                 {
-                  "joinDate": "2020-04-06",
-                  "leaveDate": null,
+                  "join_date": "2020-04-06",
+                  "leave_date": "2020-05-16",
                   "work_status": 1
                 },
                 {
-                  "joinDate": "2020-04-16",
-                  "leaveDate": null,
+                  "join_date": "2020-05-16",
+                  "leave_date": "2020-06-26",
                   "work_status": 0.5
                 }
               ]
@@ -145,15 +169,16 @@
             {
               "id": 2,
               "name": "Tim",
+              "bg_color": "#eb34ba",
               "work": [
                 {
-                  "joinDate": "2020-04-06",
-                  "leaveDate": null,
+                  "join_date": "2020-04-06",
+                  "leave_date": "2020-05-06",
                   "work_status": 1
                 },
                 {
-                  "joinDate": "2020-04-16",
-                  "leaveDate": null,
+                  "join_date": "2020-05-06",
+                  "leave_date": "2020-06-26",
                   "work_status": 0.5
                 }
               ]

@@ -44,7 +44,6 @@
   ul {
     list-style: none;
     padding: 0 10px;
-    margin-top: 10px;
 
     li {
       white-space: nowrap;

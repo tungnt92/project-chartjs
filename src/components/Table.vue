@@ -8,7 +8,7 @@
     </div>
     <div class="chart-col">
       <div class="chart__timeline">
-        <Duration :start-date="data.startTime"/>
+        <Duration :start-date="data.start_time"/>
       </div>
       <div ref="chart" class="chart__wrap" @scroll="scroll">
         <Chart :data="data"/>
@@ -63,7 +63,7 @@ export default {
       flex-flow: column;
       left: 0;
       background-color: #ffffff;
-      z-index: 2;
+      z-index: 4;
     }
 
     .project__title {
@@ -75,13 +75,20 @@ export default {
 
     .project-wrap {
       border-right: 1px solid #000;
+      padding-bottom: 20px;
+      background-color: #ffffff;
+      z-index: 2;
     }
 
     .chart__timeline, .project__title {
       position: sticky;
       top: 0;
       background-color: #ffffff;
-      z-index: 1;
+      z-index: 3;
+    }
+
+    .chart__wrap {
+      padding-bottom: 10px;
     }
 
     .chart-col {

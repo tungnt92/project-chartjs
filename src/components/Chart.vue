@@ -3,9 +3,13 @@
     <ul class="chart__list" v-for="project in data.projects">
       <li  v-for="item in project.position" class="chart__item">
         <ul class="item__member-list">
-          <li v-for="member in item.members" class="member__item">
-            <Bar :data="member.work"/>
-          </li>
+          <Bar v-for="(member, index) in item.members"
+               :key="index"
+               :data="member.work"
+               :bg-color="member.bg_color"
+               :start-day="data.start_time"
+               class="member__item"
+          />
         </ul>
       </li>
     </ul>
@@ -31,12 +35,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.chart__list {
+  margin: 20px 0 0 50px;
+
+  .chart__item {
+    padding-top: 41px;
+
+    &:first-child {
+      padding-top: 65px;
+    }
+  }
+}
+
   ul {
     padding: 0;
     list-style: none;
-
-    li {
-      padding-left: 15px;
-    }
   }
 </style>

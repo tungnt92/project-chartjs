@@ -69,6 +69,7 @@
   },
   "dependencies": {
     "moment": "^2.29.1",
-    "pre-commit": "^1.2.2"
+    "pre-commit": "^1.2.2",
+    "ant-design-vue": "^1.7.4"
   }
 }
