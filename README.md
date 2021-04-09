@@ -10,6 +10,20 @@ $ node -v
 v14.4.0
 ```
 
+#Development
+Develop Directory
+```
+./src
+```
+Start webpack dev server
+```
+$ yarn start
+```
+or
+```
+$ npm run start
+```
+
 # Features
 
 * **ES6/ESNext** - Write _ES6_ code and _Babel_ will transpile it to ES5 for backwards compatibility
@@ -32,4 +46,4 @@ v14.4.0
 
 # License
 
-MIT © Dinesh Pandiyan
+MIT © gumiviet
