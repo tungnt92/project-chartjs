@@ -20,6 +20,10 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .search {
+    background: cornflowerblue;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
 </style>
