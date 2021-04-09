@@ -21,7 +21,6 @@ module.exports = {
   entry: resolveAppPath('src/main.js'),
   module: {
     rules: [
-      // { test: /\.js$/, use: 'babel-loader' },
       { test: /\.vue$/, use: 'vue-loader' },
       { test: /\.css$/, use: ['vue-style-loader', 'css-loader'] },
       {
