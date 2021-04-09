@@ -68,6 +68,8 @@ import * as moment from 'moment'
         border-bottom: 1px solid #333333;
         flex-shrink: 0;
         position: relative;
+        background-color: #ffffff;
+        z-index: 3;
 
         &::before {
           position: absolute;
