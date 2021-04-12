@@ -10,7 +10,7 @@
 
     <div class="chart-col">
       <div class="chart__timeline">
-        <Duration :start-date="data.start_time"/>
+        <Duration :start-date="data.start_time" :type-format="options.date_format"/>
       </div>
 
       <div class="chart__wrap">
@@ -37,7 +37,12 @@ export default {
 
   data () {
     return {
-      data: Projects
+      data: Projects,
+      options: {
+        scroll: true,
+        date_format: 'YYYY-MM-DD',
+        collapse: false
+      }
     }
   }
 };
