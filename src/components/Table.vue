@@ -1,5 +1,5 @@
 <template>
-  <div class="table-wrap">
+  <div class="table-wrap" :style="{'max-height': options.scroll ? '400px' : 'unset'}">
     <div class="project-col">
       <h4 class="project__title" v-text="'Project'" />
 
@@ -37,7 +37,12 @@ export default {
 
   data () {
     return {
-      data: Projects
+      data: Projects,
+      options: {
+        scroll: true,
+        format_date: 'yyyy-mm-dd',
+        collapse: false
+      }
     }
   }
 };
@@ -46,7 +51,6 @@ export default {
 <style lang="scss" scoped>
   .table-wrap {
     display: flex;
-    max-height: 400px;
     overflow: scroll;
 
     .project-col {
