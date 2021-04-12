@@ -1,10 +1,17 @@
 <template>
   <div>
-    <div class="project" v-for="(project, index) in data.projects" :key="index">
-      <h3 class="project__name" v-text="project.name" />
+    <div class="project"
+         v-for="(project, index) in data.projects"
+         :key="index">
+      <h3 class="project__name"
+          v-text="project.name"
+          @click.prevent="collapseProject(project.name)"/>
 
-      <ul class="project__list" >
-        <li class="list__item" v-for="(item, index) in project.position" :key="index">
+      <ul v-if="project.open"
+          class="project__list" >
+        <li class="list__item"
+            v-for="(item, index) in project.position"
+            :key="index">
           <p v-text="`. ${item.members.length} ${ item.name}`" />
 
           <ul class="item__member-list">
@@ -39,6 +46,10 @@
           }
         }
         return max
+      },
+
+      collapseProject (name) {
+        this.$emit('handleCollapse', name)
       }
     }
   }
@@ -47,6 +58,9 @@
 <style lang="scss" scoped>
 .project {
   padding: 20px 15px 0;
+  &__name {
+    cursor: pointer;
+  }
 }
 
 .project__list {

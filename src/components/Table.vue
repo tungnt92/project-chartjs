@@ -4,7 +4,8 @@
       <h4 class="project__title" v-text="'Project'" />
 
       <div class="project-wrap">
-        <Project :data="data"/>
+        <Project :data="data"
+                 @handleCollapse="handleCollapse($event)"/>
       </div>
     </div>
 
@@ -37,7 +38,29 @@ export default {
 
   data () {
     return {
-      data: Projects
+      data: Projects,
+    }
+  },
+
+  created() {
+    if (this.options.collapse) {
+      this.data.projects.forEach(obj => {
+        obj.open = true;
+      })
+    }
+  },
+
+  methods: {
+    handleCollapse(e) {
+      if (this.options.collapse) {
+        let index = this.data.projects.findIndex(obj => obj.name === e)
+
+        if (index !== -1) {
+          this.data.projects[index].open = !this.data.projects[index].open
+          // ASSIGN DATA
+          this.data = {...this.data}
+        }
+      }
     }
   }
 };
@@ -56,6 +79,8 @@ export default {
       left: 0;
       background-color: #ffffff;
       z-index: 4;
+      width: 180px;
+      flex-shrink: 0;
     }
 
     .project__title {
