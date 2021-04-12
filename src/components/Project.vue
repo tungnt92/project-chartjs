@@ -7,7 +7,7 @@
           v-text="project.name"
           @click.prevent="collapseProject(project.name)"/>
 
-      <ul v-if="project.open"
+      <ul v-if="'open' in project && project.open"
           class="project__list" >
         <li class="list__item"
             v-for="(item, index) in project.position"

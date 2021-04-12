@@ -6,7 +6,7 @@
     >
       <h3>&#8203;</h3>
 
-      <template v-if="project.open"
+      <template v-if="'open' in project && project.open"
       >
         <li v-for="(item, i) in project.position"
             :key="i" class="chart__item"

@@ -17,6 +17,10 @@ import * as moment from 'moment'
       startDate: {
         type: String,
         default: ''
+      },
+      typeFormat: {
+        type: String,
+        default: 'YYYY-MM-DD'
       }
     },
 
@@ -26,12 +30,12 @@ import * as moment from 'moment'
         let listDate = []
         for (let i = 0; i <= 12; i++) {
           let date = moment(currentDate).add(i, 'months').calendar(null, {
-            sameDay: 'YYYY-MM-DD',
-            nextDay: 'YYYY-MM-DD',
-            nextWeek: 'YYYY-MM-DD',
-            lastDay: 'YYYY-MM-DD',
-            lastWeek: 'YYYY-MM-DD',
-            sameElse: 'YYYY-MM-DD'
+            sameDay: this.typeFormat,
+            nextDay:  this.typeFormat,
+            nextWeek:  this.typeFormat,
+            lastDay:  this.typeFormat,
+            lastWeek:  this.typeFormat,
+            sameElse:  this.typeFormat
           })
           let days = moment(date, 'YYYY-MM').daysInMonth()
           listDate.push({ date: date, days: days })
