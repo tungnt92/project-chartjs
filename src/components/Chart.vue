@@ -4,19 +4,26 @@
         v-for="(project, index) in data.projects"
         :key="index"
     >
-      <li v-for="(item, i) in project.position"
-          :key="i" class="chart__item"
+      <h3>&#8203;</h3>
+
+      <template v-if="project.open"
       >
-        <ul class="item__member-list">
-          <Bar v-for="(member, ind) in item.members"
-               :key="ind"
-               :data="member.work"
-               :bg-color="member.bg_color"
-               :start-day="data.start_time"
-               class="member__item"
-          />
-        </ul>
-      </li>
+        <li v-for="(item, i) in project.position"
+            :key="i" class="chart__item"
+        >
+          <p class="chart__position">&#8203;</p>
+
+          <ul class="item__member-list">
+            <Bar v-for="(member, ind) in item.members"
+                 :key="ind"
+                 :data="member.work"
+                 :bg-color="member.bg_color"
+                 :start-day="data.start_time"
+                 class="member__item"
+            />
+          </ul>
+        </li>
+      </template>
     </ul>
   </div>
 </template>
@@ -40,17 +47,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.chart__list {
-  margin: 20px 0 0 50px;
-
-  .chart__item {
-    padding-top: 41px;
-
-    &:first-child {
-      padding-top: 65px;
+  .chart {
+    &__list {
+      padding: 20px 0 0 50px;
+      margin-bottom: 0;
+    }
+    &__item {
+      margin-bottom: 10px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    &__position {
+      margin-bottom: 10px;
     }
   }
-}
 
   ul {
     padding: 0;
