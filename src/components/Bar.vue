@@ -1,19 +1,24 @@
 <template>
-  <li class="bar-wrap" :style="{'width': maxWidth + 'px'}">
-    <span class="bar" v-for="(work, index) in data"
-          :key="index"
-          :style="{
-            'background-color': bgColor,
-            'height': work.work_status*21 + 'px',
-            'width': getDays(startDay, work.join_date) >= 0 ? getDays(work.join_date, work.leave_date) *10 + 'px' : getDays(startDay, work.leave_date) *10 + 'px',
-            'left': getDays(startDay, work.join_date) >= 0 ? getDays(startDay, work.join_date)*10 + 'px' : 0
-          }"
-    />
-  </li>
+    <li class="bar-wrap" :style="{'width': maxWidth + 'px'}">
+      <a-skeleton active :loading="loading" :paragraph="{ rows: 1}" :title="false" >
+      <span class="bar" v-for="(work, index) in data"
+            :key="index"
+            :style="{
+              'background-color': bgColor,
+              'height': work.work_status*21 + 'px',
+              'width': getDays(startDay, work.join_date) >= 0 ? getDays(work.join_date, work.leave_date) *10 + 'px' : getDays(startDay, work.leave_date) *10 + 'px',
+              'left': getDays(startDay, work.join_date) >= 0 ? getDays(startDay, work.join_date)*10 + 'px' : 0
+            }"
+      />
+      </a-skeleton>
+    </li>
 </template>
 
 <script>
 import * as moment from 'moment'
+import { Skeleton } from 'ant-design-vue'
+import Vue from 'vue'
+Vue.use(Skeleton);
 
 export default {
   name: 'Bar',
@@ -32,6 +37,12 @@ export default {
     startDay: {
       type: String,
       default: ''
+    }
+  },
+
+  data() {
+    return {
+      loading: true
     }
   },
 
