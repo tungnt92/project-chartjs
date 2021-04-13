@@ -1,15 +1,16 @@
 <template>
   <div id="my-chart">
-   <div class="container">
-     <Search />
-     <ChartTable />
-   </div>
+    <div class="container">
+      <Search/>
+      <ChartTable/>
+    </div>
   </div>
 </template>
 
 <script>
-import ChartTable from './components/Table.vue'
-import Search from './components/Search.vue'
+  import ChartTable from './components/Table.vue'
+  import Search from './components/Search.vue'
+
   export default {
     components: {
       ChartTable,
@@ -19,8 +20,8 @@ import Search from './components/Search.vue'
 </script>
 
 <style lang="scss">
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 </style>

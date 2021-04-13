@@ -38,21 +38,22 @@ export default {
 
   data () {
     return {
-      data: Projects,
-      options: {
-        scroll: true,
-        format_date: 'yyyy-mm-dd',
-        collapse: true
-      }
+      data: {},
+      options: {}
     }
   },
 
-  created() {
-    if (this.options.collapse) {
+  mounted() {
+    window.eventBus.$on('jsonOptions', (data) => {
+      this.options = data
+    })
+
+    window.eventBus.$on('jsonData', (data) => {
+      this.data = data
       this.data.projects.forEach(obj => {
         obj.open = true;
       })
-    }
+    })
   },
 
   methods: {
