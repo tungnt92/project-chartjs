@@ -38,8 +38,10 @@ export default {
 
   data () {
     return {
-      data: {},
-      options: {}
+      data: Projects,
+      options: {
+        collapse: true
+      }
     }
   },
 
