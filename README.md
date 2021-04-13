@@ -55,10 +55,10 @@ MIT © gumiviet
 
 # Import Data
 ```
-window.projectChart.$emit('chartOptions', {})
+window.projectChart.$emit('chartData', {})
 ```
 
 # Import Options
 ```
-window.projectChart.$emit('chartData', {})
+window.projectChart.$emit('chartOptions', {})
 ```
