@@ -337,6 +337,6 @@ window.projectChart.$emit('chartData', {
 window.projectChart.$emit('chartOptions', {
     scroll: false,
     collapse: true,
-    date_format: 'LLL'
+    date_format: 'YYYY-MM-DD'
 })
 ```
