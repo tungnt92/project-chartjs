@@ -44,11 +44,11 @@ export default {
   },
 
   mounted() {
-    window.eventBus.$on('jsonOptions', (data) => {
+    window.projectChart.$on('chartOptions', (data) => {
       this.options = data
     })
 
-    window.eventBus.$on('jsonData', (data) => {
+    window.projectChart.$on('chartData', (data) => {
       this.data = data
       this.data.projects.forEach(obj => {
         obj.open = true;

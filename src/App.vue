@@ -1,9 +1,6 @@
 <template>
-  <div id="my-chart">
-    <div class="container">
-      <Search/>
-      <ChartTable/>
-    </div>
+  <div class="container">
+    <ChartTable/>
   </div>
 </template>
 
