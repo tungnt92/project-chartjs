@@ -47,3 +47,18 @@ $ npm run start
 # License
 
 MIT © gumiviet
+
+# Add Library
+```
+<script src="build/bundle.js"></script>
+```
+
+# Import Data
+```
+window.projectChart.$emit('chartOptions', {})
+```
+
+# Import Options
+```
+window.projectChart.$emit('chartData', {})
+```
