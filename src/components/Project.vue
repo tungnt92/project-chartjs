@@ -17,7 +17,7 @@
           <ul class="item__member-list">
             <li v-for="(member, i) in item.members"
                 :key="i" class="member__item"
-                v-text="`+ ${member.name} (${findWorkStatus(member.work)})`"
+                v-text="member.name"
             />
           </ul>
         </li>
@@ -80,6 +80,8 @@
 
   .item__member-list {
     .member__item {
+      padding-left: 10px;
+
       &:last-child {
         margin: 0
       }

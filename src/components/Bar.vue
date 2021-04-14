@@ -1,27 +1,30 @@
 <template>
     <li class="bar-wrap" :style="{'width': maxWidth + 'px'}">
-      <a-skeleton active :loading="loading" :paragraph="{ rows: 1}" :title="false" >
-      <span class="bar" v-for="(work, index) in data"
-            :key="index"
+      <span class="bar" v-for="(work, i) in data"
+            :key="i"
             :style="{
               'background-color': bgColor,
               'height': work.work_status*21 + 'px',
               'width': getDays(startDay, work.join_date) >= 0 ? getDays(work.join_date, work.leave_date) *10 + 'px' : getDays(startDay, work.leave_date) *10 + 'px',
               'left': getDays(startDay, work.join_date) >= 0 ? getDays(startDay, work.join_date)*10 + 'px' : 0
             }"
+            @mousemove="onMouseMove($event, work)"
+            @mouseleave="hidePopUp"
       />
-      </a-skeleton>
     </li>
 </template>
 
 <script>
 import * as moment from 'moment'
-import { Skeleton } from 'ant-design-vue'
-import Vue from 'vue'
-Vue.use(Skeleton);
+import PopUp from './PopUp.vue'
+import {mapMutations} from 'vuex'
 
 export default {
   name: 'Bar',
+
+  components: {
+    PopUp
+  },
 
   props: {
     data: {
@@ -37,12 +40,10 @@ export default {
     startDay: {
       type: String,
       default: ''
-    }
-  },
-
-  data() {
-    return {
-      loading: true
+    },
+    projectName: {
+      type: String,
+      default: ''
     }
   },
 
@@ -66,11 +67,38 @@ export default {
     }
   },
 
+  data () {
+    return {
+      show: false,
+      index: 0
+    }
+  },
+
   methods: {
+    ...mapMutations(['setPopupState', 'setPopUpData', 'setPopupPosition']),
+
     getDays (start, end) {
       let startTime = moment(start, 'YYYY-MM-DD')
       let endTime = moment(end, 'YYYY-MM-DD')
       return endTime.diff(startTime, 'days')
+    },
+
+    onMouseMove (e, data) {
+      console.log(this.projectName);
+      this.setPopupPosition({
+        pageX: e.pageX,
+        pageY: e.pageY
+      })
+      this.setPopupState(true)
+      this.setPopUpData({
+        ...data,
+        project_name: this.projectName
+      })
+    },
+
+    hidePopUp () {
+      this.setPopupState(false)
+      this.setPopUpData({})
     }
   }
 };
@@ -85,6 +113,16 @@ export default {
     span {
       position: absolute;
       top: 0;
+      border-radius: 3px;
+      transition: .3s ease-in-out;
+
+      &:hover {
+        border: 1px solid #000;
+      }
+
+      &:not(:first-child) {
+        margin-left: 1px;
+      }
     }
 
     &:not(:last-child) {

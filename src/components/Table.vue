@@ -40,21 +40,27 @@ export default {
     return {
       data: Projects,
       options: {
-        collapse: true
+        scroll: false,
+        collapse: true,
+        date_format: 'YYYY-MM-DD'
       }
     }
   },
 
   mounted() {
-    window.projectChart.$on('chartOptions', (data) => {
-      this.options = data
-    })
+    // window.projectChart.$on('chartOptions', (data) => {
+    //   this.options = data
+    // })
+    //
+    // window.projectChart.$on('chartData', (data) => {
+    //   this.data = data
+    //   this.data.projects.forEach(obj => {
+    //     obj.open = true;
+    //   })
+    // })
 
-    window.projectChart.$on('chartData', (data) => {
-      this.data = data
-      this.data.projects.forEach(obj => {
-        obj.open = true;
-      })
+    this.data.projects.forEach(obj => {
+      obj.open = true;
     })
   },
 

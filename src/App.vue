@@ -1,15 +1,25 @@
 <template>
   <div class="container">
     <ChartTable />
+    <transition name="fade">
+      <PopUp v-if="showPopup" :data="popupData" :page-x="popupPosition.pageX" :page-y="popupPosition.pageY"/>
+    </transition>
   </div>
 </template>
 
 <script>
   import ChartTable from './components/Table.vue'
+  import PopUp from './components/PopUp.vue'
+  import {mapGetters} from 'vuex'
 
   export default {
     components: {
-      ChartTable
+      ChartTable,
+      PopUp
+    },
+
+    computed: {
+      ...mapGetters(['showPopup', 'popupData', 'popupPosition'])
     }
   };
 </script>
@@ -18,5 +28,13 @@
   .container {
     max-width: 1200px;
     margin: 0 auto;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
   }
 </style>
