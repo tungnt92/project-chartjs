@@ -1,7 +1,7 @@
 <template>
     <li class="bar-wrap" :style="{'width': maxWidth + 'px'}">
-      <span class="bar" v-for="(work, i) in data"
-            :key="i"
+      <span class="bar" v-for="(work, index) in data"
+            :key="index"
             :style="{
               'background-color': bgColor,
               'height': work.work_status*21 + 'px',
@@ -40,6 +40,7 @@ export default {
     startDay: {
       type: String,
       default: ''
+
     },
     projectName: {
       type: String,
@@ -84,7 +85,6 @@ export default {
     },
 
     onMouseMove (e, data) {
-      console.log(this.projectName);
       this.setPopupPosition({
         pageX: e.pageX,
         pageY: e.pageY

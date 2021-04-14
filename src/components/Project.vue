@@ -3,9 +3,13 @@
     <div class="project"
          v-for="(project, index) in data.projects"
          :key="index">
-      <h3 class="project__name"
-          v-text="project.name"
-          @click.prevent="collapseProject(project.name)"/>
+      <div class="project__name"
+           @click.prevent="collapseProject(project.name)">
+        <h3 v-text="project.name"/>
+
+        <a-icon v-if="options.collapse"
+                :type="project.open ? 'minus' : 'plus'" />
+      </div>
 
       <ul v-if="'open' in project && project.open"
           class="project__list" >
@@ -27,11 +31,20 @@
 </template>
 
 <script>
+  import {Icon} from 'ant-design-vue'
+  import Vue from 'vue'
+  Vue.use(Icon);
+
   export default {
     name: "Project",
 
     props: {
       data: {
+        type: Object,
+        default: () => {}
+      },
+
+      options: {
         type: Object,
         default: () => {}
       }
@@ -59,7 +72,14 @@
 .project {
   padding: 20px 15px 0;
   &__name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     cursor: pointer;
+    margin-bottom: 10px;
+    h3 {
+      margin-bottom: 0;
+    }
   }
 }
 
