@@ -82,9 +82,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .table-container {
+    -webkit-box-shadow: 0 0 4px 0 rgba(0,0,0,.5);
+    -moz-box-shadow:    0 0 4px 0 rgba(0,0,0,.5);
+    box-shadow:         0 0 4px 0 rgba(0,0,0,.5);
+    padding: 20px;
+    border-radius: 20px;
+  }
+
   .table-wrap {
     display: flex;
     overflow: scroll;
+
+    border-radius: 20px;
 
     .project-col {
       position: sticky;

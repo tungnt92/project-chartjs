@@ -83,7 +83,7 @@ import * as moment from 'moment'
           height: 5px;
           background-color: #333333;
           bottom: 0;
-          left: 0;
+          left: -1px;
         }
 
         span {
