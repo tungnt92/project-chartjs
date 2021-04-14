@@ -1,26 +1,29 @@
 <template>
-  <a-spin :spinning="loading" size="large">
-    <div class="table-wrap" :style="{'max-height': options.scroll ? '400px' : 'unset'}">
-      <div class="project-col">
-        <h4 class="project__title" v-text="'Project'" />
+  <div class="table-container">
+    <a-spin :spinning="loading" size="large">
+      <div class="table-wrap" :style="{'max-height': options.scroll ? '400px' : 'unset'}">
+        <div class="project-col">
+          <h4 class="project__title" v-text="'Project'" />
 
-        <div class="project-wrap" :style="{'min-height': (data.projects < 1) ? '400px' : 'unset'}">
-          <Project :data="data"
-                   @handleCollapse="handleCollapse($event)"/>
+          <div class="project-wrap" :style="{'min-height': (data.projects < 1) ? '400px' : 'unset'}">
+            <Project :data="data"
+                     :options="options"
+                     @handleCollapse="handleCollapse($event)"/>
+          </div>
+        </div>
+
+        <div class="chart-col">
+          <div class="chart__timeline">
+            <Duration :start-date="data.start_time" :type-format="options.date_format"/>
+          </div>
+
+          <div class="chart__wrap">
+            <Chart :data="data" :start-date="data.start_time" :type-format="options.date_format"/>
+          </div>
         </div>
       </div>
-
-      <div class="chart-col">
-        <div class="chart__timeline">
-          <Duration :start-date="data.start_time" :type-format="options.date_format"/>
-        </div>
-
-        <div class="chart__wrap">
-          <Chart :data="data"/>
-        </div>
-      </div>
-    </div>
-  </a-spin>
+    </a-spin>
+  </div>
 </template>
 
 <script>
@@ -44,7 +47,7 @@ export default {
       options: {
         collapse: true
       },
-      loading: true,
+      loading: false,
     }
   },
 
