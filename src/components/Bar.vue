@@ -1,6 +1,5 @@
 <template>
     <li class="bar-wrap" :style="{'width': maxWidth + 'px'}">
-      <a-skeleton active :loading="loading" :paragraph="{ rows: 1}" :title="false" >
       <span class="bar" v-for="(work, index) in data"
             :key="index"
             :style="{
@@ -10,7 +9,6 @@
               'left': getDays(startDay, work.join_date) >= 0 ? getDays(startDay, work.join_date)*10 + 'px' : 0
             }"
       />
-      </a-skeleton>
     </li>
 </template>
 
@@ -37,12 +35,6 @@ export default {
     startDay: {
       type: String,
       default: ''
-    }
-  },
-
-  data() {
-    return {
-      loading: true
     }
   },
 

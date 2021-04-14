@@ -1,10 +1,12 @@
 <template>
-  <div class="table-wrap" :style="{'max-height': options.scroll ? '400px' : 'unset'}">
+  <div class="table-container">
+    <div class="table-wrap" :style="{'max-height': options.scroll ? '400px' : 'unset'}">
     <div class="project-col">
       <h4 class="project__title" v-text="'Project'" />
 
       <div class="project-wrap">
         <Project :data="data"
+                 :options="options"
                  @handleCollapse="handleCollapse($event)"/>
       </div>
     </div>
@@ -15,9 +17,10 @@
       </div>
 
       <div class="chart__wrap">
-        <Chart :data="data"/>
+        <Chart :data="data" :start-date="data.start_time" :type-format="options.date_format"/>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -75,9 +78,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .table-container {
+    -webkit-box-shadow: 0 0 4px 0 rgba(0,0,0,.5);
+    -moz-box-shadow:    0 0 4px 0 rgba(0,0,0,.5);
+    box-shadow:         0 0 4px 0 rgba(0,0,0,.5);
+    padding: 20px;
+    border-radius: 20px;
+  }
+
   .table-wrap {
     display: flex;
     overflow: scroll;
+
+    border-radius: 20px;
 
     .project-col {
       position: sticky;
