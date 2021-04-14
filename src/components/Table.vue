@@ -1,24 +1,26 @@
 <template>
-  <div class="table-wrap" :style="{'max-height': options.scroll ? '400px' : 'unset'}">
-    <div class="project-col">
-      <h4 class="project__title" v-text="'Project'" />
+  <a-spin :spinning="loading" size="large">
+    <div class="table-wrap" :style="{'max-height': options.scroll ? '400px' : 'unset'}">
+      <div class="project-col">
+        <h4 class="project__title" v-text="'Project'" />
 
-      <div class="project-wrap">
-        <Project :data="data"
-                 @handleCollapse="handleCollapse($event)"/>
+        <div class="project-wrap" :style="{'min-height': (data.projects < 1) ? '400px' : 'unset'}">
+          <Project :data="data"
+                   @handleCollapse="handleCollapse($event)"/>
+        </div>
+      </div>
+
+      <div class="chart-col">
+        <div class="chart__timeline">
+          <Duration :start-date="data.start_time" :type-format="options.date_format"/>
+        </div>
+
+        <div class="chart__wrap">
+          <Chart :data="data"/>
+        </div>
       </div>
     </div>
-
-    <div class="chart-col">
-      <div class="chart__timeline">
-        <Duration :start-date="data.start_time" :type-format="options.date_format"/>
-      </div>
-
-      <div class="chart__wrap">
-        <Chart :data="data"/>
-      </div>
-    </div>
-  </div>
+  </a-spin>
 </template>
 
 <script>
@@ -41,7 +43,8 @@ export default {
       data: Projects,
       options: {
         collapse: true
-      }
+      },
+      loading: true,
     }
   },
 
@@ -55,6 +58,10 @@ export default {
       this.data.projects.forEach(obj => {
         obj.open = true;
       })
+    })
+
+    window.projectChart.$on('loading', (data) => {
+      this.loading = data
     })
   },
 
