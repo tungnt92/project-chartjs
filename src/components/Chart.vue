@@ -218,7 +218,7 @@ export default {
     .data-popup {
       position: absolute;
       left: 0;
-      top: 50px;
+      top: 30px;
       z-index: 2;
       background-color: #ffffff;
       border-radius: 10px;
