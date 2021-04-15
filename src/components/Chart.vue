@@ -1,5 +1,5 @@
 <template>
-  <div class="chart">
+  <div class="chart" @click.prevent="getCurrentDate">
     <ul class="chart__list"
         v-for="(project, index) in data.projects"
         :key="index"
@@ -35,6 +35,10 @@
               :key="frame"/>
       </li>
     </ul>
+
+    <!--Line click-->
+    <div :style="{left: this.positionLine + 'px'}"
+        class="line"/>
   </div>
 </template>
 
@@ -46,6 +50,12 @@ export default {
 
   components: {
     Bar
+  },
+
+  data () {
+    return {
+      positionLine: 0
+    }
   },
 
   props: {
@@ -81,6 +91,22 @@ export default {
       }
       return listDate
     }
+  },
+
+  methods: {
+    getCurrentDate (e) {
+      let totalDay = Math.ceil((e.offsetX / 10))
+
+      if (totalDay > 0) {
+        console.log(e)
+        console.log('start-date:', this.startDate)
+        console.log('width click', e.offsetX)
+        console.log('total date', Math.ceil((e.offsetX / 10)))
+        this.positionLine = e.offsetX
+        let currentDate = moment(this.startDate, this.typeFormat).add(totalDay, 'days')
+        console.log('current date', moment(currentDate).format(this.typeFormat))
+      }
+    }
   }
 };
 </script>
@@ -88,16 +114,16 @@ export default {
 <style lang="scss" scoped>
   .chart {
     position: relative;
+    width: fit-content;
     &__list {
-      padding: 20px 0 0 50px;
+      padding: 20px 0 0 0;
       margin-bottom: 0;
     }
     &__frame {
       position: absolute;
-      width: 100%;
       height: 100%;
       top: 0;
-      left: 50px;
+      left: 0;
       display: flex;
       z-index: -1;
       li {
@@ -125,6 +151,15 @@ export default {
     }
     &__position {
       margin-bottom: 10px;
+    }
+
+    .line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      border-left: 1px dashed #333333;
+      z-index: 5;
     }
   }
 
