@@ -1,5 +1,7 @@
 <template>
-  <div class="chart" @click.prevent="getCurrentDate">
+  <div class="chart"
+       ref="chart"
+       @click.prevent="getCurrentDate">
     <ul class="chart__list"
         v-for="(project, index) in data.projects"
         :key="index"
@@ -45,6 +47,7 @@
 <script>
 import Bar from './Bar.vue';
 import * as moment from "moment";
+import {groupBy} from 'lodash'
 export default {
   name: 'Chart',
 
@@ -54,7 +57,8 @@ export default {
 
   data () {
     return {
-      positionLine: 0
+      positionLine: 0,
+      dataFilter: []
     }
   },
 
@@ -98,15 +102,46 @@ export default {
       let totalDay = Math.ceil((e.offsetX / 10))
 
       if (totalDay > 0) {
-        console.log(e)
-        console.log('start-date:', this.startDate)
-        console.log('width click', e.offsetX)
-        console.log('total date', Math.ceil((e.offsetX / 10)))
-        this.positionLine = e.offsetX
+        this.positionLine = e.offsetX + e.target.offsetLeft
         let currentDate = moment(this.startDate, this.typeFormat).add(totalDay, 'days')
-        console.log('current date', moment(currentDate).format(this.typeFormat))
+
+        // handle filter data with current date
+        this.handleFilterData(currentDate)
       }
-    }
+    },
+
+    handleFilterData (dateClick) {
+      let dataFilter = []
+
+      this.data.projects.map(project => {
+        project.position.map(position => {
+          position.members.map(member => {
+            member.work.map(time => {
+              if (dateClick.isBetween(moment(time.join_date), moment(time.leave_date))) {
+                dataFilter.push({
+                  project: project.name,
+                  position: position.name,
+                  member: member.name,
+                  ...time
+                })
+              }
+            })
+          })
+        })
+      })
+
+      this.dataFilter = dataFilter
+      console.log('group', groupBy(this.dataFilter, 'project'))
+    },
+
+    // getDiffDay (dateStart, dateEnd) {
+    //   const dateFrom = new Date(dateStart);
+    //   const dateTo = new Date(dateEnd);
+    //   const diffTime = Math.abs(dateTo - dateFrom);
+    //   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    //
+    //   return diffDays
+    // }
   }
 };
 </script>
@@ -159,7 +194,7 @@ export default {
       left: 0;
       height: 100%;
       border-left: 1px dashed #333333;
-      z-index: 5;
+      z-index: 2;
     }
   }
 
