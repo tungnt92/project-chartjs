@@ -1,5 +1,5 @@
 <template>
-  <div class="container" :class="{ 'full-width': options.full_width }">
+  <div class="chart-container" :class="{ 'full-width': options.full_width }">
     <ChartTable />
     <transition name="fade">
       <PopUp v-if="showPopup" :data="popupData"/>
@@ -27,7 +27,7 @@
           scroll: false,
           collapse: true,
           date_format: 'YYYY-MM-DD',
-          full_width: true
+          full_width: false
         }
       }
     },
@@ -47,7 +47,7 @@
 </script>
 
 <style lang="scss">
-  .container {
+  .chart-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 50px;

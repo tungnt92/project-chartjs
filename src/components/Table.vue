@@ -4,7 +4,7 @@
         <div class="table-wrap" :style="{'max-height': options.scroll ? '400px' : 'unset', 'overflow': loading ? 'unset' : 'scroll'}">
 
         <div class="project-col">
-          <h4 class="project__title" v-text="'Project'" />
+          <h3 class="project__title" v-text="'Project'" />
 
           <div class="project-wrap" :style="{'min-height': (!project.projects) ? '400px' : 'unset'}">
             <Project :data="project"
@@ -48,7 +48,7 @@ export default {
       // use for dev
       project: Projects,
       options: {
-        scroll: false,
+        scroll: true,
         collapse: true,
         date_format: 'YYYY-MM-DD',
         full_width: false
@@ -116,6 +116,7 @@ export default {
       left: 0;
       background-color: #ffffff;
       z-index: 4;
+      height: fit-content;
       width: 180px;
       flex-shrink: 0;
     }
@@ -123,6 +124,7 @@ export default {
     .project__title {
       margin: 0;
       padding: 15px;
+      font-size: 16px !important;
       border-bottom: 1px solid #000;
       border-right: 1px solid #000;
     }
@@ -148,6 +150,7 @@ export default {
 
     .chart-col {
       max-width: 100%;
+      height: fit-content;
     }
   }
 </style>

@@ -76,6 +76,12 @@ import * as moment from 'moment'
         background-color: #ffffff;
         z-index: 3;
 
+        &:first-child {
+          &::before {
+            left: 0;
+          }
+        }
+
         &::before {
           position: absolute;
           content: '';
@@ -90,6 +96,7 @@ import * as moment from 'moment'
           width: fit-content;
           transform: translateX(-50%);
           display: block;
+          font-size: 16px !important;
         }
       }
     }

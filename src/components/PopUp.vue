@@ -4,10 +4,10 @@
       <strong>Project: </strong> {{data.project_name}}
     </h3>
     <p>
-      <strong>Join Date: </strong> {{data.join_date}}
+      <strong>Join Date: </strong> {{joinDate}}
     </p>
     <p>
-      <strong>Leave Date: </strong> {{data.leave_date}}
+      <strong>Leave Date: </strong> {{leaveDate}}
     </p>
     <p>
       <strong>Work Status: </strong> {{data.work_status}}
@@ -17,6 +17,7 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import * as moment from 'moment'
 
 export default {
   name: 'Popup',
@@ -37,6 +38,14 @@ export default {
 
   computed: {
     ...mapGetters(['popupPosition', 'popupDirection']),
+
+    joinDate () {
+      return moment(this.data.join_date).format('YYYY-MM-DD')
+    },
+
+    leaveDate () {
+      return moment(this.data.leave_date).format('YYYY-MM-DD')
+    }
   },
 
   mounted() {
@@ -71,6 +80,7 @@ export default {
     border-radius: 10px;
     border: 1px solid #ccc;
     position: fixed;
+    z-index: 3;
     background-color: #ffffff;
     padding: 15px;
     white-space: nowrap;
