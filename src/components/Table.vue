@@ -44,33 +44,42 @@ export default {
 
   data () {
     return {
-      project: {},
-      options: {},
       loading: false,
+      // use for dev
+      project: Projects,
+      options: {
+        scroll: false,
+        collapse: true,
+        date_format: 'YYYY-MM-DD',
+        full_width: false
+      },
+      // use for build
+      // project: {},
+      // options: {}
     }
   },
 
   mounted() {
-    window.projectChart.$on('chartOptions', (options) => {
-      this.options = options
-    })
-
-    window.projectChart.$on('chartData', (data) => {
-      this.project = data
-      this.project.projects.forEach(obj => {
-        obj.open = true;
-      })
-    })
-
-    window.projectChart.$on('loading', (loading) => {
-      this.loading = loading
-    })
-
-    // if (!this.isEmpty(this.project)) {
+    // use for build
+    // window.projectChart.$on('chartOptions', (options) => {
+    //   this.options = options
+    // })
+    //
+    // window.projectChart.$on('chartData', (data) => {
+    //   this.project = data
     //   this.project.projects.forEach(obj => {
     //     obj.open = true;
     //   })
-    // }
+    // })
+    //
+    // window.projectChart.$on('loading', (loading) => {
+    //   this.loading = loading
+    // })
+
+    // use for dev
+    this.project.projects.forEach(obj => {
+      obj.open = true;
+    })
   },
 
   methods: {
@@ -84,15 +93,7 @@ export default {
           this.project = {...this.project}
         }
       }
-    },
-
-    // isEmpty(obj) {
-    //   for(let prop in obj) {
-    //     if(obj.hasOwnProperty(prop))
-    //       return false;
-    //   }
-    //   return true;
-    // }
+    }
   }
 };
 </script>
