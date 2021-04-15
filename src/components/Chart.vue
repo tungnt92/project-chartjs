@@ -19,6 +19,7 @@
                  :data="member.work"
                  :bg-color="member.bg_color"
                  :start-day="data.start_time"
+                 :project-name="project.name"
                  class="member__item"
             />
           </ul>

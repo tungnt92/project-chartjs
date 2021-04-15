@@ -8,14 +8,23 @@
               'width': getDays(startDay, work.join_date) >= 0 ? getDays(work.join_date, work.leave_date) *10 + 'px' : getDays(startDay, work.leave_date) *10 + 'px',
               'left': getDays(startDay, work.join_date) >= 0 ? getDays(startDay, work.join_date)*10 + 'px' : 0
             }"
+            @mousemove="onMouseMove($event, work)"
+            @mouseleave="hidePopUp"
       />
     </li>
 </template>
 
 <script>
 import * as moment from 'moment'
+import PopUp from './PopUp.vue'
+import {mapMutations} from 'vuex'
+
 export default {
   name: 'Bar',
+
+  components: {
+    PopUp
+  },
 
   props: {
     data: {
@@ -29,6 +38,11 @@ export default {
       default: '#000'
     },
     startDay: {
+      type: String,
+      default: ''
+
+    },
+    projectName: {
       type: String,
       default: ''
     }
@@ -54,11 +68,37 @@ export default {
     }
   },
 
+  data () {
+    return {
+      show: false,
+      index: 0
+    }
+  },
+
   methods: {
+    ...mapMutations(['setPopupState', 'setPopUpData', 'setPopupPosition']),
+
     getDays (start, end) {
       let startTime = moment(start, 'YYYY-MM-DD')
       let endTime = moment(end, 'YYYY-MM-DD')
       return endTime.diff(startTime, 'days')
+    },
+
+    onMouseMove (e, data) {
+      this.setPopupPosition({
+        pageX: e.pageX,
+        pageY: e.pageY
+      })
+      this.setPopupState(true)
+      this.setPopUpData({
+        ...data,
+        project_name: this.projectName
+      })
+    },
+
+    hidePopUp () {
+      this.setPopupState(false)
+      this.setPopUpData({})
     }
   }
 };
@@ -73,6 +113,16 @@ export default {
     span {
       position: absolute;
       top: 0;
+      border-radius: 3px;
+      transition: .3s ease-in-out;
+
+      &:hover {
+        border: 1px solid #000;
+      }
+
+      &:not(:first-child) {
+        margin-left: 1px;
+      }
     }
 
     &:not(:last-child) {

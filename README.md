@@ -47,3 +47,296 @@ $ npm run start
 # License
 
 MIT © gumiviet
+
+# Add Library
+```
+<script src="build/bundle.js"></script>
+```
+
+# Import Sample Data
+```
+window.projectChart.$emit('chartData', {
+    "start_time": "2020-04-09",
+    "end_time": "2020-05-06",
+    "projects": [
+      {
+        "id": 1,
+        "name": "Asura",
+        "position": [
+          {
+            "name": "FE",
+            "members": [
+              {
+                "id": 1,
+                "name": "Tun",
+                "bg_color": "#eb4034",
+                "work": [
+                  {
+                    "join_date": "2020-04-04",
+                    "leave_date": "2020-04-16",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-06",
+                    "leave_date": "2020-05-16",
+                    "work_status": 0.5
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "name": "Tim",
+                "bg_color": "#ebeb34",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-05-06",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-06",
+                    "leave_date": "2020-05-16",
+                    "work_status": 0.5
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "name": "Kuro",
+                "bg_color": "#eba234",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-05-06",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-06",
+                    "leave_date": "2020-05-16",
+                    "work_status": 0.5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "BE",
+            "members": [
+              {
+                "id": 1,
+                "name": "Tun",
+                "bg_color": "#7deb34",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-05-06",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-06",
+                    "leave_date": "2020-05-26",
+                    "work_status": 0.5
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "name": "Tim",
+                "bg_color": "#34d3eb",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-05-06",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-06",
+                    "leave_date": "2020-05-20",
+                    "work_status": 0.5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "NewPho",
+        "position": [
+          {
+            "name": "FE",
+            "members": [
+              {
+                "id": 1,
+                "name": "Tun",
+                "bg_color": "#3477eb",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-04-26",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-04-26",
+                    "leave_date": "2020-05-06",
+                    "work_status": 0.5
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "name": "Tim",
+                "bg_color": "#6e34eb",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-04-20",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-04-20",
+                    "leave_date": "2020-05-26",
+                    "work_status": 0.5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "BE",
+            "members": [
+              {
+                "id": 1,
+                "name": "Tun",
+                "bg_color": "#b734eb",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-05-16",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-16",
+                    "leave_date": "2020-06-26",
+                    "work_status": 0.5
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "name": "Tim",
+                "bg_color": "#eb34ba",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-05-06",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-06",
+                    "leave_date": "2020-06-26",
+                    "work_status": 0.5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Dnavi",
+        "position": [
+          {
+            "name": "FE",
+            "members": [
+              {
+                "id": 1,
+                "name": "Tun",
+                "bg_color": "#ff8100",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-04-26",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-04-26",
+                    "leave_date": "2020-05-06",
+                    "work_status": 0.5
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "name": "Tim",
+                "bg_color": "#ff8100",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-04-20",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-04-20",
+                    "leave_date": "2020-05-26",
+                    "work_status": 0.5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "BE",
+            "members": [
+              {
+                "id": 1,
+                "name": "Tun",
+                "bg_color": "#ff8100",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-05-16",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-16",
+                    "leave_date": "2020-06-26",
+                    "work_status": 0.5
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "name": "Tim",
+                "bg_color": "#eb34ba",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-05-06",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-06",
+                    "leave_date": "2020-06-26",
+                    "work_status": 0.5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  })
+```
+
+# Import Sample Options
+```
+window.projectChart.$emit('chartOptions', {
+    scroll: false,
+    collapse: true,
+    date_format: 'YYYY-MM-DD'
+})
+```
