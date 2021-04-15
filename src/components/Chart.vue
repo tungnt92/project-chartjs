@@ -1,7 +1,6 @@
 <template>
-  <div class="chart">
+  <div class="chart" @click.prevent="getCurrentDate">
     <ul class="chart__list"
-        @click.prevent="getCurrentDate"
         v-for="(project, index) in data.projects"
         :key="index"
     >
@@ -35,11 +34,11 @@
         <span v-for="frame in 3"
               :key="frame"/>
       </li>
-
-      <!--Line click-->
-      <li :style="{left: this.positionLine + 'px'}"
-          class="line"/>
     </ul>
+
+    <!--Line click-->
+    <div :style="{left: this.positionLine + 'px'}"
+        class="line"/>
   </div>
 </template>
 
@@ -119,13 +118,12 @@ export default {
     &__list {
       padding: 20px 0 0 0;
       margin-bottom: 0;
-      margin-left: 50px;
     }
     &__frame {
       position: absolute;
       height: 100%;
       top: 0;
-      left: 50px;
+      left: 0;
       display: flex;
       z-index: -1;
       li {
@@ -144,12 +142,6 @@ export default {
           display: block;
         }
       }
-
-      .line {
-        position: absolute;
-        height: 100%;
-        border-left: 1px dashed #333333;
-      }
     }
     &__item {
       margin-bottom: 10px;
@@ -159,6 +151,15 @@ export default {
     }
     &__position {
       margin-bottom: 10px;
+    }
+
+    .line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      border-left: 1px dashed #333333;
+      z-index: 5;
     }
   }
 

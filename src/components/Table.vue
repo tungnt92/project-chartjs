@@ -143,6 +143,7 @@ export default {
 
     .chart__wrap {
       padding-bottom: 10px;
+      margin-left: 50px;
     }
 
     .chart-col {
