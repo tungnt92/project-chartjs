@@ -1,10 +1,12 @@
 <template>
-  <div class="chart">
+  <div class="chart"
+       ref="chart"
+       @click.prevent="getCurrentDate">
     <ul class="chart__list"
         v-for="(project, index) in data.projects"
         :key="index"
     >
-      <h3>&#8203;</h3>
+      <h3 >&#8203;</h3>
 
       <template v-if="'open' in project && project.open"
       >
@@ -35,17 +37,58 @@
               :key="frame"/>
       </li>
     </ul>
+
+    <!--Line click-->
+    <div class="line-wrap">
+      <div :style="{left: this.positionLine + 'px'}"
+           class="line"/>
+
+      <div :style="{left: this.positionLine - 200 + 'px'}"
+           class="data-popup"
+           v-show="showPopup">
+        <h3 class="popup-header">
+          {{ currentDay }}
+          <button @click="!showPopup" class="btn-close">x</button>
+        </h3>
+        <div class="project-wrap" v-for="(value, key) in dataFilter" :key="key">
+          <h3>Project: {{ key }}</h3>
+
+          <ul class="project__list" >
+            <li class="list__item"
+                v-for="(item, index) in value"
+                :key="index">
+              <p v-text="`Member: ${item.member}`" />
+              <p v-text="`Position: ${item.position}`" />
+              <p v-text="`Work Status: ${item.work_status}`" />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
 import Bar from './Bar.vue';
+import PopUp from './PopUp.vue'
 import * as moment from "moment";
+import {groupBy} from 'lodash'
 export default {
   name: 'Chart',
 
   components: {
-    Bar
+    Bar,
+    PopUp
+  },
+
+  data () {
+    return {
+      positionLine: 0,
+      dataFilter: {},
+      currentDay: '',
+      showPopup: false
+    }
   },
 
   props: {
@@ -81,6 +124,43 @@ export default {
       }
       return listDate
     }
+  },
+
+  methods: {
+    getCurrentDate (e) {
+      let totalDay = Math.ceil((e.offsetX / 10))
+      this.showPopup = true
+      if (totalDay > 0) {
+        this.positionLine = e.offsetX + e.target.offsetLeft
+        let currentDate = moment(this.startDate, this.typeFormat).add(totalDay, 'days')
+        // handle filter data with current date
+        this.currentDay = currentDate.format(this.typeFormat)
+        this.handleFilterData(currentDate)
+      }
+    },
+
+    handleFilterData (dateClick) {
+      let dataFilter = []
+
+      this.data.projects.map(project => {
+        project.position.map(position => {
+          position.members.map(member => {
+            member.work.map(time => {
+              if (dateClick.isBetween(moment(time.join_date), moment(time.leave_date))) {
+                dataFilter.push({
+                  project: project.name,
+                  position: position.name,
+                  member: member.name,
+                  ...time
+                })
+              }
+            })
+          })
+        })
+      })
+
+      this.dataFilter = groupBy(dataFilter, 'project')
+    }
   }
 };
 </script>
@@ -88,16 +168,20 @@ export default {
 <style lang="scss" scoped>
   .chart {
     position: relative;
+    width: fit-content;
     &__list {
-      padding: 20px 0 0 50px;
+      padding: 20px 0 0 0;
       margin-bottom: 0;
+
+      h3 {
+        user-select: none;
+      }
     }
     &__frame {
       position: absolute;
-      width: 100%;
       height: 100%;
       top: 0;
-      left: 50px;
+      left: 0;
       display: flex;
       z-index: -1;
       li {
@@ -125,6 +209,99 @@ export default {
     }
     &__position {
       margin-bottom: 10px;
+    }
+
+    .line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      border-left: 1px dashed #333333;
+      z-index: 2;
+    }
+
+    .data-popup {
+      position: absolute;
+      left: 0;
+      top: 30px;
+      z-index: 2;
+      background-color: #ffffff;
+      border-radius: 10px;
+      width: 200px;
+      border: 1px solid #cccccc;
+      max-height: 300px;
+      overflow-y: scroll;
+
+      .project-wrap {
+        padding: 15px;
+
+        &:not(:last-child) {
+          padding-bottom: 10px;
+          margin-bottom: 10px;
+          border-bottom: 1px solid #ccc;
+        }
+      }
+
+      .popup-header {
+        padding: 15px;
+        position: sticky;
+        top: 0;
+        background-color: #e3e3e3;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+      }
+      .btn-close {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        border-radius: 50%;
+        border: 0;
+        cursor: pointer;
+        font-size: 10px;
+        &:hover {
+          background: #ddd;
+          color: #ffffff;
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  .project__list {
+    margin: 0;
+    list-style: none;
+
+    p {
+      margin: 0 0 10px;
+    }
+
+    .list__item {
+      &:not(:last-child) {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #cccccc;
+      }
+    }
+
+    .item__member-list {
+      .member__item {
+        padding-left: 10px;
+
+        &:last-child {
+          margin: 0
+        }
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding: 0 10px;
+
+      li {
+        white-space: nowrap;
+        margin-bottom: 10px;
+      }
     }
   }
 

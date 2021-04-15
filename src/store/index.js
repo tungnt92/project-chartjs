@@ -8,14 +8,16 @@ export default new Vuex.Store({
     return {
       popupData: {},
       showPopup: false,
-      popupPosition: {}
+      popupPosition: {},
+      popupDirection: {}
     };
   },
 
   getters: {
     popupData: (state) => state.popupData,
     showPopup: (state) => state.showPopup,
-    popupPosition: (state) => state.popupPosition
+    popupPosition: (state) => state.popupPosition,
+    popupDirection: (state) => state.popupDirection
   },
 
   mutations: {
@@ -32,6 +34,11 @@ export default new Vuex.Store({
     setPopupPosition(state, payload) {
       // eslint-disable-next-line no-param-reassign
       state.popupPosition = payload;
+    },
+
+    setPopupDirection(state, payload) {
+      // eslint-disable-next-line no-param-reassign
+      state.popupDirection = payload;
     }
   }
 });

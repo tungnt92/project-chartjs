@@ -27,6 +27,7 @@ import * as moment from 'moment'
     computed: {
       durations () {
         let currentDate = this.startDate
+        currentDate = moment(this.startDate).isValid() ? this.startDate : Date.now()
         let listDate = []
         for (let i = 0; i <= 12; i++) {
           let date = moment(currentDate).add(i, 'months').calendar(null, {
@@ -75,6 +76,12 @@ import * as moment from 'moment'
         background-color: #ffffff;
         z-index: 3;
 
+        &:first-child {
+          &::before {
+            left: 0;
+          }
+        }
+
         &::before {
           position: absolute;
           content: '';
@@ -89,6 +96,7 @@ import * as moment from 'moment'
           width: fit-content;
           transform: translateX(-50%);
           display: block;
+          font-size: 16px !important;
         }
       }
     }

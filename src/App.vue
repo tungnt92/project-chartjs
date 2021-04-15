@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
+  <div class="chart-container" :class="{ 'full-width': options.full_width }">
     <ChartTable />
     <transition name="fade">
-      <PopUp v-if="showPopup" :data="popupData" :page-x="popupPosition.pageX" :page-y="popupPosition.pageY"/>
+      <PopUp v-if="showPopup" :data="popupData"/>
     </transition>
   </div>
 </template>
@@ -18,6 +18,19 @@
       PopUp
     },
 
+    data () {
+      return {
+        options: {}
+      }
+    },
+
+    mounted() {
+      // use for build
+      window.projectChart.$on('chartOptions', (options) => {
+        this.options = options
+      })
+    },
+
     computed: {
       ...mapGetters(['showPopup', 'popupData', 'popupPosition'])
     }
@@ -25,10 +38,14 @@
 </script>
 
 <style lang="scss">
-  .container {
+  .chart-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 50px;
+
+    &.full-width {
+      max-width: 100%;
+    }
   }
 
   .fade-enter-active, .fade-leave-active {

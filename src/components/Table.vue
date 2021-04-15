@@ -1,27 +1,30 @@
 <template>
-  <div class="table-container">
-    <div class="table-wrap" :style="{'max-height': options.scroll ? '400px' : 'unset'}">
-    <div class="project-col">
-      <h4 class="project__title" v-text="'Project'" />
+    <div class="table-container">
+      <a-spin :spinning="loading" size="large">
+        <div class="table-wrap" :style="{'max-height': options.scroll ? '400px' : 'unset', 'overflow': loading ? 'unset' : 'scroll'}">
 
-      <div class="project-wrap">
-        <Project :data="data"
-                 :options="options"
-                 @handleCollapse="handleCollapse($event)"/>
+        <div class="project-col">
+          <h3 class="project__title" v-text="'Project'" />
+
+          <div class="project-wrap" :style="{'min-height': (!project.projects) ? '400px' : 'unset'}">
+            <Project :data="project"
+                     :options="options"
+                     @handleCollapse="handleCollapse($event)"/>
+          </div>
+        </div>
+
+        <div class="chart-col">
+          <div class="chart__timeline">
+            <Duration :start-date="project.start_time" :type-format="options.date_format"/>
+          </div>
+
+          <div class="chart__wrap">
+            <Chart :data="project" :start-date="project.start_time" :type-format="options.date_format"/>
+          </div>
+        </div>
       </div>
+      </a-spin>
     </div>
-
-    <div class="chart-col">
-      <div class="chart__timeline">
-        <Duration :start-date="data.start_time" :type-format="options.date_format"/>
-      </div>
-
-      <div class="chart__wrap">
-        <Chart :data="data" :start-date="data.start_time" :type-format="options.date_format"/>
-      </div>
-    </div>
-  </div>
-  </div>
 </template>
 
 <script>
@@ -41,41 +44,38 @@ export default {
 
   data () {
     return {
-      data: Projects,
-      options: {
-        scroll: false,
-        collapse: false,
-        date_format: 'YYYY-MM-DD'
-      }
+      loading: false,
+      project: {},
+      options: {}
     }
   },
 
   mounted() {
-    // window.projectChart.$on('chartOptions', (data) => {
-    //   this.options = data
-    // })
-    //
-    // window.projectChart.$on('chartData', (data) => {
-    //   this.data = data
-    //   this.data.projects.forEach(obj => {
-    //     obj.open = true;
-    //   })
-    // })
+    window.projectChart.$on('chartOptions', (options) => {
+      this.options = options
+    })
 
-    this.data.projects.forEach(obj => {
-      obj.open = true;
+    window.projectChart.$on('chartData', (data) => {
+      this.project = data
+      this.project.projects.forEach(obj => {
+        obj.open = true;
+      })
+    })
+
+    window.projectChart.$on('loading', (loading) => {
+      this.loading = loading
     })
   },
 
   methods: {
     handleCollapse(e) {
       if (this.options.collapse) {
-        let index = this.data.projects.findIndex(obj => obj.name === e)
+        let index = this.project.projects.findIndex(obj => obj.name === e)
 
         if (index !== -1) {
-          this.data.projects[index].open = !this.data.projects[index].open
+          this.project.projects[index].open = !this.project.projects[index].open
           // ASSIGN DATA
-          this.data = {...this.data}
+          this.project = {...this.project}
         }
       }
     }
@@ -85,17 +85,13 @@ export default {
 
 <style lang="scss" scoped>
   .table-container {
-    -webkit-box-shadow: 0 0 4px 0 rgba(0,0,0,.5);
-    -moz-box-shadow:    0 0 4px 0 rgba(0,0,0,.5);
-    box-shadow:         0 0 4px 0 rgba(0,0,0,.5);
+    box-shadow: 0 0 4px 0 rgba(0,0,0,.5);
     padding: 20px;
     border-radius: 20px;
   }
 
   .table-wrap {
     display: flex;
-    overflow: scroll;
-
     border-radius: 20px;
 
     .project-col {
@@ -105,6 +101,7 @@ export default {
       left: 0;
       background-color: #ffffff;
       z-index: 4;
+      height: fit-content;
       width: 180px;
       flex-shrink: 0;
     }
@@ -112,6 +109,7 @@ export default {
     .project__title {
       margin: 0;
       padding: 15px;
+      font-size: 16px !important;
       border-bottom: 1px solid #000;
       border-right: 1px solid #000;
     }
@@ -132,10 +130,12 @@ export default {
 
     .chart__wrap {
       padding-bottom: 10px;
+      margin-left: 50px;
     }
 
     .chart-col {
       max-width: 100%;
+      height: fit-content;
     }
   }
 </style>
