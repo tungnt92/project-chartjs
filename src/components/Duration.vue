@@ -1,8 +1,8 @@
 <template>
   <div class="duration">
     <ul>
-      <li v-for="date in durations" :style="{'width': date.days*10 + 'px'}">
-        <span v-text="date.date" />
+      <li v-for="(date, index) in durations" :style="{'width': date.days*10 + 'px'}">
+        <span :key="index" v-text="date.date" />
       </li>
     </ul>
   </div>
@@ -17,21 +17,26 @@ import * as moment from 'moment'
       startDate: {
         type: String,
         default: ''
+      },
+      typeFormat: {
+        type: String,
+        default: 'YYYY-MM-DD'
       }
     },
 
     computed: {
       durations () {
         let currentDate = this.startDate
+        currentDate = moment(this.startDate).isValid() ? this.startDate : Date.now()
         let listDate = []
         for (let i = 0; i <= 12; i++) {
           let date = moment(currentDate).add(i, 'months').calendar(null, {
-            sameDay: 'YYYY-MM-DD',
-            nextDay: 'YYYY-MM-DD',
-            nextWeek: 'YYYY-MM-DD',
-            lastDay: 'YYYY-MM-DD',
-            lastWeek: 'YYYY-MM-DD',
-            sameElse: 'YYYY-MM-DD'
+            sameDay: this.typeFormat,
+            nextDay:  this.typeFormat,
+            nextWeek:  this.typeFormat,
+            lastDay:  this.typeFormat,
+            lastWeek:  this.typeFormat,
+            sameElse:  this.typeFormat
           })
           let days = moment(date, 'YYYY-MM').daysInMonth()
           listDate.push({ date: date, days: days })
@@ -71,6 +76,12 @@ import * as moment from 'moment'
         background-color: #ffffff;
         z-index: 3;
 
+        &:first-child {
+          &::before {
+            left: 0;
+          }
+        }
+
         &::before {
           position: absolute;
           content: '';
@@ -78,13 +89,14 @@ import * as moment from 'moment'
           height: 5px;
           background-color: #333333;
           bottom: 0;
-          left: 0;
+          left: -1px;
         }
 
         span {
           width: fit-content;
           transform: translateX(-50%);
           display: block;
+          font-size: 16px !important;
         }
       }
     }

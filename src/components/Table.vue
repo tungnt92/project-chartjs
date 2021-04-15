@@ -1,20 +1,30 @@
 <template>
-  <div class="table-wrap">
-    <div class="project-col">
-      <p class="project__title">Project</p>
-      <div ref="project" class="project-wrap" @scroll="scroll">
-        <Project :data="data" @scroll="scroll"/>
+    <div class="table-container">
+      <a-spin :spinning="loading" size="large">
+        <div class="table-wrap" :style="{'max-height': options.scroll ? '400px' : 'unset', 'overflow': loading ? 'unset' : 'scroll'}">
+
+        <div class="project-col">
+          <h3 class="project__title" v-text="'Project'" />
+
+          <div class="project-wrap" :style="{'min-height': (!project.projects) ? '400px' : 'unset'}">
+            <Project :data="project"
+                     :options="options"
+                     @handleCollapse="handleCollapse($event)"/>
+          </div>
+        </div>
+
+        <div class="chart-col">
+          <div class="chart__timeline">
+            <Duration :start-date="project.start_time" :type-format="options.date_format"/>
+          </div>
+
+          <div class="chart__wrap">
+            <Chart :data="project" :start-date="project.start_time" :type-format="options.date_format"/>
+          </div>
+        </div>
       </div>
+      </a-spin>
     </div>
-    <div class="chart-col">
-      <div class="chart__timeline">
-        <Duration :start-date="data.start_time"/>
-      </div>
-      <div ref="chart" class="chart__wrap" @scroll="scroll">
-        <Chart :data="data"/>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -34,28 +44,55 @@ export default {
 
   data () {
     return {
-      data: Projects,
-      scrollAmount: 0
-    }
-  },
-
-  methods: {
-    scroll ({target: {scrollTop}}) {
-      this.scrollAmount = scrollTop
+      loading: false,
+      project: {},
+      options: {}
     }
   },
 
   mounted() {
+    window.projectChart.$on('chartOptions', (options) => {
+      this.options = options
+    })
 
+    window.projectChart.$on('chartData', (data) => {
+      this.project = data
+      this.project.projects.forEach(obj => {
+        obj.open = true;
+      })
+    })
+
+    window.projectChart.$on('loading', (loading) => {
+      this.loading = loading
+    })
+  },
+
+  methods: {
+    handleCollapse(e) {
+      if (this.options.collapse) {
+        let index = this.project.projects.findIndex(obj => obj.name === e)
+
+        if (index !== -1) {
+          this.project.projects[index].open = !this.project.projects[index].open
+          // ASSIGN DATA
+          this.project = {...this.project}
+        }
+      }
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+  .table-container {
+    box-shadow: 0 0 4px 0 rgba(0,0,0,.5);
+    padding: 20px;
+    border-radius: 20px;
+  }
+
   .table-wrap {
     display: flex;
-    max-height: 400px;
-    overflow: scroll;
+    border-radius: 20px;
 
     .project-col {
       position: sticky;
@@ -64,11 +101,15 @@ export default {
       left: 0;
       background-color: #ffffff;
       z-index: 4;
+      height: fit-content;
+      width: 180px;
+      flex-shrink: 0;
     }
 
     .project__title {
       margin: 0;
       padding: 15px;
+      font-size: 16px !important;
       border-bottom: 1px solid #000;
       border-right: 1px solid #000;
     }
@@ -89,10 +130,12 @@ export default {
 
     .chart__wrap {
       padding-bottom: 10px;
+      margin-left: 50px;
     }
 
     .chart-col {
       max-width: 100%;
+      height: fit-content;
     }
   }
 </style>

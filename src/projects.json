@@ -186,6 +186,90 @@
           ]
         }
       ]
+    },
+    {
+      "id": 3,
+      "name": "Dnavi",
+      "position": [
+        {
+          "name": "FE",
+          "members": [
+            {
+              "id": 1,
+              "name": "Tun",
+              "bg_color": "#ff8100",
+              "work": [
+                {
+                  "join_date": "2020-04-06",
+                  "leave_date": "2020-04-26",
+                  "work_status": 1
+                },
+                {
+                  "join_date": "2020-04-26",
+                  "leave_date": "2020-05-06",
+                  "work_status": 0.5
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "name": "Tim",
+              "bg_color": "#ff8100",
+              "work": [
+                {
+                  "join_date": "2020-04-06",
+                  "leave_date": "2020-04-20",
+                  "work_status": 1
+                },
+                {
+                  "join_date": "2020-04-20",
+                  "leave_date": "2020-05-26",
+                  "work_status": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "BE",
+          "members": [
+            {
+              "id": 1,
+              "name": "Tun",
+              "bg_color": "#ff8100",
+              "work": [
+                {
+                  "join_date": "2020-04-06",
+                  "leave_date": "2020-05-16",
+                  "work_status": 1
+                },
+                {
+                  "join_date": "2020-05-16",
+                  "leave_date": "2020-06-26",
+                  "work_status": 0.5
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "name": "Tim",
+              "bg_color": "#eb34ba",
+              "work": [
+                {
+                  "join_date": "2020-04-06",
+                  "leave_date": "2020-05-06",
+                  "work_status": 1
+                },
+                {
+                  "join_date": "2020-05-06",
+                  "leave_date": "2020-06-26",
+                  "work_status": 0.5
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
