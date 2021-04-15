@@ -2,7 +2,7 @@
   <div class="container">
     <ChartTable />
     <transition name="fade">
-      <PopUp v-if="showPopup" :data="popupData" :page-x="popupPosition.pageX" :page-y="popupPosition.pageY"/>
+      <PopUp v-if="showPopup" :data="popupData"/>
     </transition>
   </div>
 </template>

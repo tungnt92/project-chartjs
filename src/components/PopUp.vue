@@ -1,5 +1,5 @@
 <template>
-  <div class="popup-wrap" :style="{'left': pageX + 'px', 'top': pageY + 10 + 'px'}">
+  <div ref="popup" class="popup-wrap" :style="direction()">
     <h3>
       <strong>Project: </strong> {{data.project_name}}
     </h3>
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   name: 'Popup',
 
@@ -23,16 +25,41 @@ export default {
     data: {
       type: Object,
       default: () => {}
-    },
+    }
+  },
 
-    pageX: {
-      type: Number,
-      default: 0
-    },
+  data () {
+    return {
+      width: 0,
+      height: 0
+    }
+  },
 
-    pageY: {
-      type: Number,
-      default: 0
+  computed: {
+    ...mapGetters(['popupPosition', 'popupDirection']),
+  },
+
+  mounted() {
+    this.width = this.$refs.popup.clientWidth
+    this.height = this.$refs.popup.clientHeight
+  },
+
+  methods: {
+    direction () {
+      let xDirection = {}
+      let yDirection = {}
+      if (window.innerWidth < this.popupDirection.clientX + this.width) {
+        xDirection = { 'left': this.popupPosition.pageX - this.width + 'px' }
+      } else {
+        xDirection = { 'left': this.popupPosition.pageX + 'px' }
+      }
+      if (window.innerHeight < this.popupDirection.clientY + this.height) {
+        yDirection = { 'top': this.popupPosition.pageY - this.height - window.pageYOffset  - 10 + 'px' }
+      } else {
+        yDirection = { 'top': this.popupPosition.pageY + 10 - window.pageYOffset + 'px' }
+      }
+
+      return {...xDirection, ...yDirection}
     }
   }
 };
@@ -46,6 +73,7 @@ export default {
     position: fixed;
     background-color: #ffffff;
     padding: 15px;
+    white-space: nowrap;
 
     h3 {
       border-bottom: 1px solid #cccccc;

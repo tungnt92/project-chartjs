@@ -76,7 +76,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['setPopupState', 'setPopUpData', 'setPopupPosition']),
+    ...mapMutations(['setPopupState', 'setPopUpData', 'setPopupPosition', 'setPopupDirection']),
 
     getDays (start, end) {
       let startTime = moment(start, 'YYYY-MM-DD')
@@ -88,6 +88,10 @@ export default {
       this.setPopupPosition({
         pageX: e.pageX,
         pageY: e.pageY
+      })
+      this.setPopupDirection({
+        clientX: e.clientX,
+        clientY: e.clientY
       })
       this.setPopupState(true)
       this.setPopUpData({

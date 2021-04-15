@@ -44,33 +44,37 @@ export default {
 
   data () {
     return {
-      project: {},
-      options: {},
+      project: Projects,
+      options: {
+        scroll: true,
+        collapse: true,
+        date_format: 'YYYY-MM-DD'
+      },
       loading: false,
     }
   },
 
   mounted() {
-    window.projectChart.$on('chartOptions', (options) => {
-      this.options = options
-    })
-
-    window.projectChart.$on('chartData', (data) => {
-      this.project = data
-      this.project.projects.forEach(obj => {
-        obj.open = true;
-      })
-    })
-
-    window.projectChart.$on('loading', (loading) => {
-      this.loading = loading
-    })
-
-    // if (!this.isEmpty(this.project)) {
+    // window.projectChart.$on('chartOptions', (options) => {
+    //   this.options = options
+    // })
+    //
+    // window.projectChart.$on('chartData', (data) => {
+    //   this.project = data
     //   this.project.projects.forEach(obj => {
     //     obj.open = true;
     //   })
-    // }
+    // })
+    //
+    // window.projectChart.$on('loading', (loading) => {
+    //   this.loading = loading
+    // })
+
+    if (!this.isEmpty(this.project)) {
+      this.project.projects.forEach(obj => {
+        obj.open = true;
+      })
+    }
   },
 
   methods: {
@@ -86,13 +90,13 @@ export default {
       }
     },
 
-    // isEmpty(obj) {
-    //   for(let prop in obj) {
-    //     if(obj.hasOwnProperty(prop))
-    //       return false;
-    //   }
-    //   return true;
-    // }
+    isEmpty(obj) {
+      for(let prop in obj) {
+        if(obj.hasOwnProperty(prop))
+          return false;
+      }
+      return true;
+    }
   }
 };
 </script>
