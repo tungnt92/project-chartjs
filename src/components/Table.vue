@@ -44,17 +44,23 @@ export default {
 
   data () {
     return {
+      loading: false,
+      // use for dev
       project: Projects,
       options: {
-        scroll: true,
+        scroll: false,
         collapse: true,
-        date_format: 'YYYY-MM-DD'
+        date_format: 'YYYY-MM-DD',
+        full_width: false
       },
-      loading: false,
+      // use for build
+      // project: {},
+      // options: {}
     }
   },
 
   mounted() {
+    // use for build
     // window.projectChart.$on('chartOptions', (options) => {
     //   this.options = options
     // })
@@ -70,11 +76,10 @@ export default {
     //   this.loading = loading
     // })
 
-    if (!this.isEmpty(this.project)) {
-      this.project.projects.forEach(obj => {
-        obj.open = true;
-      })
-    }
+    // use for dev
+    this.project.projects.forEach(obj => {
+      obj.open = true;
+    })
   },
 
   methods: {
@@ -88,14 +93,6 @@ export default {
           this.project = {...this.project}
         }
       }
-    },
-
-    isEmpty(obj) {
-      for(let prop in obj) {
-        if(obj.hasOwnProperty(prop))
-          return false;
-      }
-      return true;
     }
   }
 };
