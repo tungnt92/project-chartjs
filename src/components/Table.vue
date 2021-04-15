@@ -45,40 +45,25 @@ export default {
   data () {
     return {
       loading: false,
-      // use for dev
-      project: Projects,
-      options: {
-        scroll: true,
-        collapse: true,
-        date_format: 'YYYY-MM-DD',
-        full_width: false
-      },
-      // use for build
-      // project: {},
-      // options: {}
+      project: {},
+      options: {}
     }
   },
 
   mounted() {
-    // use for build
-    // window.projectChart.$on('chartOptions', (options) => {
-    //   this.options = options
-    // })
-    //
-    // window.projectChart.$on('chartData', (data) => {
-    //   this.project = data
-    //   this.project.projects.forEach(obj => {
-    //     obj.open = true;
-    //   })
-    // })
-    //
-    // window.projectChart.$on('loading', (loading) => {
-    //   this.loading = loading
-    // })
+    window.projectChart.$on('chartOptions', (options) => {
+      this.options = options
+    })
 
-    // use for dev
-    this.project.projects.forEach(obj => {
-      obj.open = true;
+    window.projectChart.$on('chartData', (data) => {
+      this.project = data
+      this.project.projects.forEach(obj => {
+        obj.open = true;
+      })
+    })
+
+    window.projectChart.$on('loading', (loading) => {
+      this.loading = loading
     })
   },
 

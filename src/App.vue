@@ -20,24 +20,15 @@
 
     data () {
       return {
-        // use for build
-        // options: {},
-        // use for dev
-        options: {
-          scroll: false,
-          collapse: true,
-          date_format: 'YYYY-MM-DD',
-          full_width: false
-        }
+        options: {}
       }
     },
 
     mounted() {
       // use for build
-      // window.projectChart.$on('chartOptions', (options) => {
-      //   this.options = options
-      // })
-      //
+      window.projectChart.$on('chartOptions', (options) => {
+        this.options = options
+      })
     },
 
     computed: {
