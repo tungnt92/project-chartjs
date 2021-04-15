@@ -44,8 +44,12 @@
            class="line"/>
 
       <div :style="{left: this.positionLine - 200 + 'px'}"
-           class="data-popup">
-        <h3 class="popup-header">{{ currentDay }}</h3>
+           class="data-popup"
+           v-show="showPopup">
+        <h3 class="popup-header">
+          {{ currentDay }}
+          <button @click="!showPopup" class="btn-close">x</button>
+        </h3>
         <div class="project-wrap" v-for="(value, key) in dataFilter" :key="key">
           <h3>Project: {{ key }}</h3>
 
@@ -82,7 +86,8 @@ export default {
     return {
       positionLine: 0,
       dataFilter: {},
-      currentDay: ''
+      currentDay: '',
+      showPopup: false
     }
   },
 
@@ -124,7 +129,7 @@ export default {
   methods: {
     getCurrentDate (e) {
       let totalDay = Math.ceil((e.offsetX / 10))
-
+      this.showPopup = true
       if (totalDay > 0) {
         this.positionLine = e.offsetX + e.target.offsetLeft
         let currentDate = moment(this.startDate, this.typeFormat).add(totalDay, 'days')
@@ -243,6 +248,22 @@ export default {
         top: 0;
         background-color: #e3e3e3;
         border-bottom: 1px solid rgba(0,0,0,.125);
+      }
+      .btn-close {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        border-radius: 50%;
+        border: 0;
+        cursor: pointer;
+        font-size: 10px;
+        &:hover {
+          background: #ddd;
+          color: #ffffff;
+        }
+        &:focus {
+          outline: none;
+        }
       }
     }
   }
