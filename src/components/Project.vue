@@ -79,6 +79,8 @@
     margin-bottom: 10px;
     h3 {
       margin-bottom: 0;
+      font-weight: 500;
+      font-size: 16.38px!important;
     }
   }
 }
@@ -90,6 +92,7 @@
 
   p {
     margin: 0 0 10px;
+    font-size: 14px!important;
   }
 
   .list__item {
@@ -115,6 +118,7 @@
     li {
       white-space: nowrap;
       margin-bottom: 10px;
+      font-size: 14px!important;
     }
   }
 }
