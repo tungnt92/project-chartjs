@@ -3,8 +3,7 @@
       <a-spin :spinning="loading" size="large">
         <div class="table-wrap"
              :style="{'max-height': options.scroll ? '400px' : 'unset',
-                       'overflow': loading ? 'unset' : 'scroll',
-                       'overflow-y': showPopup ? 'hidden' : 'scroll',}"
+                       'overflow': loading ? 'unset' : 'auto'}"
               :class="showPopup ? 'show-infor' : ''">
 
         <div class="project-col">
@@ -57,7 +56,7 @@
 </template>
 
 <script>
-import Projects from '../projects.json'
+// import Projects from '../projects.json'
 import Duration from './Duration.vue';
 import Project from './Project.vue';
 import Chart from './Chart.vue';
@@ -77,44 +76,36 @@ export default {
     return {
       loading: false,
       // use for dev
-      project: Projects,
-      options: {
-        scroll: true,
-        collapse: true,
-        date_format: 'YYYY-MM-DD',
-        full_width: false
-      },
+      project: {},
+      options: {},
       showPopup: false,
       dataFilter: {},
       currentDay: '',
-      positionLine: 0,
-      // use for build
-      // project: {},
-      // options: {}
+      positionLine: 0
     }
   },
 
   mounted() {
     // use for build
-    // window.projectChart.$on('chartOptions', (options) => {
-    //   this.options = options
-    // })
-    //
-    // window.projectChart.$on('chartData', (data) => {
-    //   this.project = data
-    //   this.project.projects.forEach(obj => {
-    //     obj.open = true;
-    //   })
-    // })
-    //
-    // window.projectChart.$on('loading', (loading) => {
-    //   this.loading = loading
-    // })
+    window.projectChart.$on('chartOptions', (options) => {
+      this.options = options
+    })
+
+    window.projectChart.$on('chartData', (data) => {
+      this.project = data
+      this.project.projects.forEach(obj => {
+        obj.open = true;
+      })
+    })
+
+    window.projectChart.$on('loading', (loading) => {
+      this.loading = loading
+    })
 
     // use for dev
-    this.project.projects.forEach(obj => {
-      obj.open = true;
-    })
+    // this.project.projects.forEach(obj => {
+    //   obj.open = true;
+    // })
   },
 
   methods: {
@@ -133,7 +124,7 @@ export default {
     getCurrentDate(e) {
       this.showPopup = true;
       this.positionLine = e.offsetX + e.target.offsetLeft
-      let totalDay = Math.ceil((this.positionLine/ 10))
+      let totalDay = Math.floor((this.positionLine/ 10))
       let currentDate = moment(this.project.start_time, this.options.date_format).add(totalDay, 'days')
       this.currentDay = currentDate.format(this.options.date_format)
       this.handleFilterData(currentDate)

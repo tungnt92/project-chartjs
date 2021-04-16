@@ -5,7 +5,7 @@
             :style="{
               'background-color': bgColor,
               'height': work.work_status*21 + 'px',
-              'width': getDays(startDay, work.join_date) >= 0 ? getDays(work.join_date, work.leave_date) *10 + 'px' : getDays(startDay, work.leave_date) *10 + 'px',
+              'width': getDays(startDay, work.join_date) >= 0 ? (getDays(work.join_date, work.leave_date) *10 + 10) + 'px' : (getDays(startDay, work.leave_date) *10 + 10)+ 'px',
               'left': getDays(startDay, work.join_date) >= 0 ? getDays(startDay, work.join_date)*10 + 'px' : 0
             }"
             @mousemove="onMouseMove($event, work)"
