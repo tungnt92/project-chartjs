@@ -6,288 +6,289 @@
 </head>
 <body>
 <div id="app"></div>
-<!--<script src="build/bundle.js"></script>-->
-<!--<script>-->
-<!--  window.projectChart.$emit('chartData', {-->
-<!--    "start_time": "2020-04-09",-->
-<!--    "end_time": "2020-05-06",-->
-<!--    "projects": [-->
-<!--      {-->
-<!--        "id": 1,-->
-<!--        "name": "Asura",-->
-<!--        "position": [-->
-<!--          {-->
-<!--            "name": "FE",-->
-<!--            "members": [-->
-<!--              {-->
-<!--                "id": 1,-->
-<!--                "name": "Tun",-->
-<!--                "bg_color": "#ffcb91",-->
-<!--                "work": [-->
-<!--                  {-->
-<!--                    "join_date": "2020-04-04",-->
-<!--                    "leave_date": "2020-04-16",-->
-<!--                    "work_status": 1-->
-<!--                  },-->
-<!--                  {-->
-<!--                    "join_date": "2020-05-06",-->
-<!--                    "leave_date": "2020-05-16",-->
-<!--                    "work_status": 0.5-->
-<!--                  }-->
-<!--                ]-->
-<!--              },-->
-<!--              {-->
-<!--                "id": 2,-->
-<!--                "name": "Tim",-->
-<!--                "bg_color": "#ffefa1",-->
-<!--                "work": [-->
-<!--                  {-->
-<!--                    "join_date": "2020-04-09",-->
-<!--                    "leave_date": "2020-05-08",-->
-<!--                    "work_status": 1-->
-<!--                  },-->
-<!--                  {-->
-<!--                    "join_date": "2020-05-09",-->
-<!--                    "leave_date": "2020-06-09",-->
-<!--                    "work_status": 0.5-->
-<!--                  }-->
-<!--                ]-->
-<!--              },-->
-<!--              {-->
-<!--                "id": 3,-->
-<!--                "name": "Kuro",-->
-<!--                "bg_color": "#94ebcd",-->
-<!--                "work": [-->
-<!--                  {-->
-<!--                    "join_date": "2020-04-06",-->
-<!--                    "leave_date": "2020-05-06",-->
-<!--                    "work_status": 1-->
-<!--                  },-->
-<!--                  {-->
-<!--                    "join_date": "2020-05-06",-->
-<!--                    "leave_date": "2020-05-16",-->
-<!--                    "work_status": 0.5-->
-<!--                  }-->
-<!--                ]-->
-<!--              }-->
-<!--            ]-->
-<!--          },-->
-<!--          {-->
-<!--            "name": "BE",-->
-<!--            "members": [-->
-<!--              {-->
-<!--                "id": 1,-->
-<!--                "name": "Tun",-->
-<!--                "bg_color": "#6ddccf",-->
-<!--                "work": [-->
-<!--                  {-->
-<!--                    "join_date": "2020-04-06",-->
-<!--                    "leave_date": "2020-05-06",-->
-<!--                    "work_status": 1-->
-<!--                  },-->
-<!--                  {-->
-<!--                    "join_date": "2020-05-06",-->
-<!--                    "leave_date": "2020-05-26",-->
-<!--                    "work_status": 0.5-->
-<!--                  }-->
-<!--                ]-->
-<!--              },-->
-<!--              {-->
-<!--                "id": 2,-->
-<!--                "name": "Tim",-->
-<!--                "bg_color": "#28527a",-->
-<!--                "work": [-->
-<!--                  {-->
-<!--                    "join_date": "2020-04-06",-->
-<!--                    "leave_date": "2020-05-06",-->
-<!--                    "work_status": 1-->
-<!--                  },-->
-<!--                  {-->
-<!--                    "join_date": "2020-05-06",-->
-<!--                    "leave_date": "2020-05-20",-->
-<!--                    "work_status": 0.5-->
-<!--                  }-->
-<!--                ]-->
-<!--              }-->
-<!--            ]-->
-<!--          }-->
-<!--        ]-->
-<!--      },-->
-<!--      {-->
-<!--        "id": 2,-->
-<!--        "name": "NewPho",-->
-<!--        "position": [-->
-<!--          {-->
-<!--            "name": "FE",-->
-<!--            "members": [-->
-<!--              {-->
-<!--                "id": 1,-->
-<!--                "name": "Tun",-->
-<!--                "bg_color": "#8ac4d0",-->
-<!--                "work": [-->
-<!--                  {-->
-<!--                    "join_date": "2020-04-06",-->
-<!--                    "leave_date": "2020-04-26",-->
-<!--                    "work_status": 1-->
-<!--                  },-->
-<!--                  {-->
-<!--                    "join_date": "2020-04-26",-->
-<!--                    "leave_date": "2020-05-06",-->
-<!--                    "work_status": 0.5-->
-<!--                  }-->
-<!--                ]-->
-<!--              },-->
-<!--              {-->
-<!--                "id": 2,-->
-<!--                "name": "Tim",-->
-<!--                "bg_color": "#f4d160",-->
-<!--                "work": [-->
-<!--                  {-->
-<!--                    "join_date": "2020-04-06",-->
-<!--                    "leave_date": "2020-04-20",-->
-<!--                    "work_status": 1-->
-<!--                  },-->
-<!--                  {-->
-<!--                    "join_date": "2020-04-20",-->
-<!--                    "leave_date": "2020-05-26",-->
-<!--                    "work_status": 0.5-->
-<!--                  }-->
-<!--                ]-->
-<!--              }-->
-<!--            ]-->
-<!--          },-->
-<!--          {-->
-<!--            "name": "BE",-->
-<!--            "members": [-->
-<!--              {-->
-<!--                "id": 1,-->
-<!--                "name": "Tun",-->
-<!--                "bg_color": "#fbeeac",-->
-<!--                "work": [-->
-<!--                  {-->
-<!--                    "join_date": "2020-04-06",-->
-<!--                    "leave_date": "2020-05-16",-->
-<!--                    "work_status": 1-->
-<!--                  },-->
-<!--                  {-->
-<!--                    "join_date": "2020-05-16",-->
-<!--                    "leave_date": "2020-06-26",-->
-<!--                    "work_status": 0.5-->
-<!--                  }-->
-<!--                ]-->
-<!--              },-->
-<!--              {-->
-<!--                "id": 2,-->
-<!--                "name": "Tim",-->
-<!--                "bg_color": "#ffc93c",-->
-<!--                "work": [-->
-<!--                  {-->
-<!--                    "join_date": "2020-04-06",-->
-<!--                    "leave_date": "2020-05-06",-->
-<!--                    "work_status": 1-->
-<!--                  },-->
-<!--                  {-->
-<!--                    "join_date": "2020-05-06",-->
-<!--                    "leave_date": "2020-06-26",-->
-<!--                    "work_status": 0.5-->
-<!--                  }-->
-<!--                ]-->
-<!--              }-->
-<!--            ]-->
-<!--          }-->
-<!--        ]-->
-<!--      },-->
-<!--      {-->
-<!--        "id": 3,-->
-<!--        "name": "Dnavi",-->
-<!--        "position": [-->
-<!--          {-->
-<!--            "name": "FE",-->
-<!--            "members": [-->
-<!--              {-->
-<!--                "id": 1,-->
-<!--                "name": "Tun",-->
-<!--                "bg_color": "#dbf6e9",-->
-<!--                "work": [-->
-<!--                  {-->
-<!--                    "join_date": "2020-04-06",-->
-<!--                    "leave_date": "2020-04-26",-->
-<!--                    "work_status": 1-->
-<!--                  },-->
-<!--                  {-->
-<!--                    "join_date": "2020-04-26",-->
-<!--                    "leave_date": "2020-05-06",-->
-<!--                    "work_status": 0.5-->
-<!--                  }-->
-<!--                ]-->
-<!--              },-->
-<!--              {-->
-<!--                "id": 2,-->
-<!--                "name": "Tim",-->
-<!--                "bg_color": "#9ddfd3",-->
-<!--                "work": [-->
-<!--                  {-->
-<!--                    "join_date": "2020-04-06",-->
-<!--                    "leave_date": "2020-04-20",-->
-<!--                    "work_status": 1-->
-<!--                  },-->
-<!--                  {-->
-<!--                    "join_date": "2020-04-20",-->
-<!--                    "leave_date": "2020-05-26",-->
-<!--                    "work_status": 0.5-->
-<!--                  }-->
-<!--                ]-->
-<!--              }-->
-<!--            ]-->
-<!--          },-->
-<!--          {-->
-<!--            "name": "BE",-->
-<!--            "members": [-->
-<!--              {-->
-<!--                "id": 1,-->
-<!--                "name": "Tun",-->
-<!--                "bg_color": "#ff8100",-->
-<!--                "work": [-->
-<!--                  {-->
-<!--                    "join_date": "2020-04-06",-->
-<!--                    "leave_date": "2020-05-16",-->
-<!--                    "work_status": 1-->
-<!--                  },-->
-<!--                  {-->
-<!--                    "join_date": "2020-05-16",-->
-<!--                    "leave_date": "2020-06-26",-->
-<!--                    "work_status": 0.5-->
-<!--                  }-->
-<!--                ]-->
-<!--              },-->
-<!--              {-->
-<!--                "id": 2,-->
-<!--                "name": "Tim",-->
-<!--                "bg_color": "#31326f",-->
-<!--                "work": [-->
-<!--                  {-->
-<!--                    "join_date": "2020-04-06",-->
-<!--                    "leave_date": "2020-05-06",-->
-<!--                    "work_status": 1-->
-<!--                  },-->
-<!--                  {-->
-<!--                    "join_date": "2020-05-06",-->
-<!--                    "leave_date": "2020-06-26",-->
-<!--                    "work_status": 0.5-->
-<!--                  }-->
-<!--                ]-->
-<!--              }-->
-<!--            ]-->
-<!--          }-->
-<!--        ]-->
-<!--      }-->
-<!--    ]-->
-<!--  })-->
-<!--  window.projectChart.$emit('chartOptions', {-->
-<!--    scroll: true,-->
-<!--    collapse: true,-->
-<!--    date_format: 'YYYY-MM-DD'-->
-<!--  })-->
-<!--</script>-->
+<script src="build/bundle.js"></script>
+<script>
+  window.projectChart.$emit('chartData', {
+    "start_time": "2020-04-09",
+    "end_time": "2020-05-06",
+    "projects": [
+      {
+        "id": 1,
+        "name": "Asura",
+        "position": [
+          {
+            "name": "FE",
+            "members": [
+              {
+                "id": 1,
+                "name": "Tun",
+                "bg_color": "#ffcb91",
+                "work": [
+                  {
+                    "join_date": "2020-04-04",
+                    "leave_date": "2020-04-16",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-06",
+                    "leave_date": "2020-05-16",
+                    "work_status": 0.5
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "name": "Tim",
+                "bg_color": "#ffefa1",
+                "work": [
+                  {
+                    "join_date": "2020-04-09",
+                    "leave_date": "2020-05-08",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-09",
+                    "leave_date": "2020-06-09",
+                    "work_status": 0.5
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "name": "Kuro",
+                "bg_color": "#94ebcd",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-05-06",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-06",
+                    "leave_date": "2020-05-16",
+                    "work_status": 0.5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "BE",
+            "members": [
+              {
+                "id": 1,
+                "name": "Tun",
+                "bg_color": "#6ddccf",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-05-06",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-06",
+                    "leave_date": "2020-05-26",
+                    "work_status": 0.5
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "name": "Tim",
+                "bg_color": "#28527a",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-05-06",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-06",
+                    "leave_date": "2020-05-20",
+                    "work_status": 0.5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "NewPho",
+        "position": [
+          {
+            "name": "FE",
+            "members": [
+              {
+                "id": 1,
+                "name": "Tun",
+                "bg_color": "#8ac4d0",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-04-26",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-04-26",
+                    "leave_date": "2020-05-06",
+                    "work_status": 0.5
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "name": "Tim",
+                "bg_color": "#f4d160",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-04-20",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-04-20",
+                    "leave_date": "2020-05-26",
+                    "work_status": 0.5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "BE",
+            "members": [
+              {
+                "id": 1,
+                "name": "Tun",
+                "bg_color": "#fbeeac",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-05-16",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-16",
+                    "leave_date": "2020-06-26",
+                    "work_status": 0.5
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "name": "Tim",
+                "bg_color": "#ffc93c",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-05-06",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-06",
+                    "leave_date": "2020-06-26",
+                    "work_status": 0.5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Dnavi",
+        "position": [
+          {
+            "name": "FE",
+            "members": [
+              {
+                "id": 1,
+                "name": "Tun",
+                "bg_color": "#dbf6e9",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-04-26",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-04-26",
+                    "leave_date": "2020-05-06",
+                    "work_status": 0.5
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "name": "Tim",
+                "bg_color": "#9ddfd3",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-04-20",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-04-20",
+                    "leave_date": "2020-05-26",
+                    "work_status": 0.5
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "BE",
+            "members": [
+              {
+                "id": 1,
+                "name": "Tun",
+                "bg_color": "#ff8100",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-05-16",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-16",
+                    "leave_date": "2020-06-26",
+                    "work_status": 0.5
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "name": "Tim",
+                "bg_color": "#31326f",
+                "work": [
+                  {
+                    "join_date": "2020-04-06",
+                    "leave_date": "2020-05-06",
+                    "work_status": 1
+                  },
+                  {
+                    "join_date": "2020-05-06",
+                    "leave_date": "2020-06-26",
+                    "work_status": 0.5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  })
+  window.projectChart.$emit('chartOptions', {
+    scroll: true,
+    collapse: true,
+    date_format: 'YYYY-MM-DD',
+    show_Name_Project: false
+  })
+</script>
 </body>
 </html>

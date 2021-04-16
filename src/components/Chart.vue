@@ -7,7 +7,7 @@
           v-for="(project, index) in data.projects"
           :key="index"
       >
-        <h3 >&#8203;</h3>
+        <h3 v-if="showNameProject">&#8203;</h3>
 
         <template v-if="'open' in project && project.open"
         >
@@ -78,6 +78,10 @@ export default {
     positionLine: {
       type: Number,
       default: 0
+    },
+    showNameProject: {
+      type: Boolean,
+      default: false
     }
   },
 

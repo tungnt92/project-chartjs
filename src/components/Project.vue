@@ -4,7 +4,8 @@
          v-for="(project, index) in data.projects"
          :key="index">
       <div class="project__name"
-           @click.prevent="collapseProject(project.name)">
+           @click.prevent="collapseProject(project.name)"
+            v-if="options.show_Name_Project">
         <h3 v-text="project.name"/>
 
         <a-icon v-if="options.collapse"
@@ -16,7 +17,7 @@
         <li class="list__item"
             v-for="(item, index) in project.position"
             :key="index">
-          <p v-text="`. ${item.members.length} ${ item.name}`" />
+          <p v-text="`${ item.name} (total: ${item.members.length})`" />
 
           <ul class="item__member-list">
             <li v-for="(member, i) in item.members"

@@ -25,12 +25,13 @@
             <Chart @clickChart="getCurrentDate"
                    :data="project" :start-date="project.start_time"
                    :type-format="options.date_format"
+                   :show-name-project="options.show_Name_Project"
                    :positionLine="positionLine"/>
 
             <div class="data-popup" v-show="showPopup">
               <h3 class="popup-header">
                 {{ currentDay }}
-                <button @click="showPopup = false" class="btn-close">x</button>
+                <button @click="showPopup = false" class="btn-close">&#215;</button>
               </h3>
               <h3 v-if="isEmpty(dataFilter)" class="infor-warning">Không có dữ liệu</h3>
               <div class="project-wrap" v-for="(value, key) in dataFilter" :key="key">
@@ -176,7 +177,8 @@ export default {
     display: flex;
     border-radius: 20px;
     &.show-infor {
-      width: calc(100% - 250px);
+      width: 100%;
+      animation: fadeTable .2s linear forwards;
     }
 
     .project-col {
@@ -229,11 +231,12 @@ export default {
     top: 0;
     z-index: 10;
     background-color: #ffffff;
-    width: 250px;
+    width: 0;
     border: 1px solid #cccccc;
     max-height: 100%;
     overflow-y: scroll;
     min-height: 100%;
+    animation: fadePopup .2s linear forwards;
 
     .project-wrap {
       padding: 15px;
@@ -262,13 +265,15 @@ export default {
       text-align: center;
     }
     .btn-close {
+      content: "\00D7";
       position: absolute;
       right: 5px;
       top: 5px;
       border-radius: 50%;
       border: 0;
       cursor: pointer;
-      font-size: 10px;
+      font-size: 16px;
+      padding: 4px 10px;
       &:hover {
         background: #ddd;
         color: #ffffff;
@@ -290,5 +295,40 @@ export default {
         }
       }
     }
+  }
+  @keyframes fadePopup {
+    from {
+      width: 0;
+    }
+    to {
+      width: 250px;
+    }
+  }
+  @keyframes fadeTable {
+    from {
+      width: 100%;
+    }
+    to {
+      width: calc(100% - 250px);
+    }
+  }
+  ::-webkit-scrollbar-track
+  {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+  }
+
+  ::-webkit-scrollbar
+  {
+    width: 5px;
+    height: 5px;
+    background-color: #F5F5F5;
+  }
+  ::-webkit-scrollbar-thumb
+  {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #c1c1c1;
   }
 </style>
