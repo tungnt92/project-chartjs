@@ -111,7 +111,7 @@ export default {
 .pms-chart__chart {
   position: relative;
   width: fit-content;
-  &__list {
+  .chart__list {
     padding: 20px 0 0 0;
     margin-bottom: 0;
 
@@ -119,7 +119,7 @@ export default {
       user-select: none;
     }
   }
-  &__frame {
+  .chart__frame {
     position: absolute;
     height: 100%;
     top: 0;
@@ -143,13 +143,13 @@ export default {
       }
     }
   }
-  &__item {
+  .chart__item {
     margin-bottom: 10px;
     &:last-child {
       margin-bottom: 0;
     }
   }
-  &__position {
+  .chart__position {
     margin-bottom: 10px;
   }
 

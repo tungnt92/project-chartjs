@@ -1,7 +1,9 @@
 <template>
     <div class="pms-chart__table-container">
-      <a-spin :spinning="loading" size="large">
-        <div class="table-wrap"
+      <a-spin :spinning="loading"
+              class="custom-spin-container"
+              size="large">
+        <div class="table-chart-wrapper"
              :style="{'max-height': options.scroll ? '400px' : 'unset',
                        'overflow': loading ? 'unset' : 'auto'}"
               :class="showPopup ? 'show-infor' : 'hide-infor'">
@@ -28,7 +30,11 @@
                    :show-name-project="options.show_Name_Project"
                    :positionLine="positionLine"/>
 
-            <SideBar :current-day="currentDay" :data="dataFilter" :show-popup="showPopup" @close="showPopup = !showPopup"/>
+            <SideBar :current-day="currentDay"
+                     :data="dataFilter"
+                     :show-popup="showPopup"
+                     :options="options"
+                     @close="showPopup = !showPopup"/>
           </div>
         </div>
       </div>
@@ -138,7 +144,11 @@ export default {
     border-radius: 20px;
   }
 
-  .table-wrap {
+  .custom-spin-container {
+    overflow: hidden;
+  }
+
+  .table-chart-wrapper {
     display: flex;
     border-radius: 20px;
 
