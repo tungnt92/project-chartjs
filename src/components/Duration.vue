@@ -48,6 +48,8 @@ import * as moment from 'moment'
 </script>
 
 <style lang="scss" scoped>
+  @import "../scss/variable.scss";
+
   .pms-chart__duration {
     ul {
       display: flex;
@@ -61,7 +63,7 @@ import * as moment from 'moment'
         position: absolute;
         width: 50px;
         height: 1px;
-        background-color: #000000;
+        background-color: $main-color;
         bottom: 0;
         left: 0;
       }
@@ -70,10 +72,10 @@ import * as moment from 'moment'
         white-space: nowrap;
         margin: 0;
         padding: 15px 0 15px;
-        border-bottom: 1px solid #333333;
+        border-bottom: 1px solid $main-color;
         flex-shrink: 0;
         position: relative;
-        background-color: #ffffff;
+        background-color: $main-bg;
         z-index: 3;
 
         &:first-child {
@@ -87,7 +89,7 @@ import * as moment from 'moment'
           content: '';
           width: 1px;
           height: 5px;
-          background-color: #333333;
+          background-color: $main-color;
           bottom: 0;
           left: -1px;
         }

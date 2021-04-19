@@ -7,7 +7,7 @@
     </h3>
     <h3 v-if="isEmpty(data)" class="infor-warning">Không có dữ liệu</h3>
     <div class="project-wrap" v-for="(value, key) in data" :key="key">
-      <h3 v-if="options.show_Name_Project">Project: {{ key }}</h3>
+      <h3 v-if="options.show_name_project">Project: {{ key }}</h3>
 
       <ul class="project__list" >
         <li class="list__item"
@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import isEmpty from '../helpers';
+
 export default {
   name: 'SideBar',
 
@@ -50,19 +52,16 @@ export default {
   },
 
   methods: {
-    isEmpty(obj) {
-      for (let prop in obj) {
-        if (obj.hasOwnProperty(prop)) {
-          return false;
-        }
-      }
-      return true
+    isEmpty (obj) {
+      return isEmpty(obj)
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/variable.scss";
+
 .data-popup {
   display: block;
   position: absolute;
@@ -70,7 +69,7 @@ export default {
   right: 0;
   z-index: 10;
   width: 250px;
-  background-color: #ffffff;
+  background-color: $main-bg;
   border: 1px solid #cccccc;
   max-height: 100%;
   overflow-y: scroll;
@@ -81,7 +80,8 @@ export default {
     border-right: 0;
 
     h3 {
-      font-size: 16.38px;
+      font-size: 16.38px !important;
+      color: $main-color;
     }
 
     &:not(:last-child) {
@@ -95,9 +95,13 @@ export default {
     padding: 15px;
     position: sticky;
     top: 0;
-    background-color: #e3e3e3;
-    border-bottom: 1px solid rgba(0,0,0,.125);
-    font-size: 16.38px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16.38px !important;
+    background-color: $main-color-dim;
+    color: $main-color;
+    border-bottom: 1px solid #cccccc;
   }
   .infor-warning {
     position: absolute;
@@ -109,18 +113,14 @@ export default {
   }
   .btn-close {
     content: "\00D7";
-    position: absolute;
-    right: 5px;
-    top: 5px;
     border-radius: 50%;
     border: 0;
     cursor: pointer;
     font-size: 16px;
     padding: 4px 10px;
-    &:hover {
-      background: #ddd;
-      color: #ffffff;
-    }
+    background-color: $main-bg;
+    color: $main-color;
+
     &:focus {
       outline: none;
     }
@@ -130,14 +130,14 @@ export default {
     padding: 0 10px;
 
     li {
-      border-bottom: 1px solid rgba(0,0,0,.125);
+      border-bottom: 1px solid #cccccc;
       white-space: nowrap;
       margin-bottom: 10px;
       &:last-child {
         border-bottom: 0;
       }
       p {
-        font-size: 14px;
+        font-size: 14px !important;
       }
     }
   }

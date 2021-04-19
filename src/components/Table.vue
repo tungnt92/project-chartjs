@@ -27,14 +27,15 @@
             <Chart @clickChart="getCurrentDate"
                    :data="project" :start-date="project.start_time"
                    :type-format="options.date_format"
-                   :show-name-project="options.show_Name_Project"
+                   :show-name-project="options.show_name_project"
+                   :show-line="showLine"
                    :positionLine="positionLine"/>
 
             <SideBar :current-day="currentDay"
                      :data="dataFilter"
                      :show-popup="showPopup"
                      :options="options"
-                     @close="showPopup = !showPopup"/>
+                     @close="closePopUp"/>
           </div>
         </div>
       </div>
@@ -47,6 +48,7 @@ import Duration from './Duration.vue';
 import Project from './Project.vue';
 import Chart from './Chart.vue';
 import SideBar from './SideBar.vue';
+import isEmpty from '../helpers';
 import * as moment from "moment";
 import {groupBy} from "lodash";
 
@@ -64,8 +66,15 @@ export default {
     return {
       loading: false,
       project: {},
-      options: {},
+      options: {
+        scroll: false,
+        date_format: 'YYYY-MM-DD',
+        dark_mode: false,
+        show_name_project: true,
+        collapse: false
+      },
       showPopup: false,
+      showLine: false,
       dataFilter: {},
       currentDay: '',
       positionLine: 0
@@ -74,7 +83,9 @@ export default {
 
   mounted() {
     window.projectChart.$on('chartOptions', (options) => {
-      this.options = options
+      if (!isEmpty(options)) {
+        this.options = {...this.options, ...options}
+      }
     })
 
     window.projectChart.$on('chartData', (data) => {
@@ -104,6 +115,7 @@ export default {
 
     getCurrentDate(e) {
       this.showPopup = true;
+      this.showLine = true
       this.positionLine = e.offsetX + e.target.offsetLeft
       let totalDay = Math.floor((this.positionLine/ 10))
       let currentDate = moment(this.project.start_time, this.options.date_format).add(totalDay, 'days')
@@ -132,16 +144,24 @@ export default {
       })
 
       this.dataFilter = groupBy(dataFilter, 'project')
+    },
+
+    closePopUp () {
+      this.showPopup = false
+      this.showLine = false
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+  @import "../scss/variable.scss";
+
   .pms-chart__table-container {
     box-shadow: 0 0 4px 0 rgba(0,0,0,.5);
     padding: 20px;
     border-radius: 20px;
+    background-color: $main-bg;
   }
 
   .custom-spin-container {
@@ -161,7 +181,7 @@ export default {
       display: flex;
       flex-flow: column;
       left: 0;
-      background-color: #ffffff;
+      background-color: $main-bg;
       z-index: 4;
       height: fit-content;
       width: 180px;
@@ -172,21 +192,22 @@ export default {
       margin: 0;
       padding: 15px;
       font-size: 16px !important;
-      border-bottom: 1px solid #000;
-      border-right: 1px solid #000;
+      color: $main-color;
+      border-bottom: 1px solid $main-color;
+      border-right: 1px solid $main-color;
     }
 
     .project-wrap {
-      border-right: 1px solid #000;
+      border-right: 1px solid $main-color;
       padding-bottom: 20px;
-      background-color: #ffffff;
+      background-color: $main-bg;
       z-index: 2;
     }
 
     .chart__timeline, .project__title {
       position: sticky;
       top: 0;
-      background-color: #ffffff;
+      background-color: $main-bg;
       z-index: 3;
     }
 
@@ -197,6 +218,7 @@ export default {
 
     .chart-col {
       height: fit-content;
+      background-color: $main-bg;
     }
   }
 

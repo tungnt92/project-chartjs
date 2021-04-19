@@ -41,7 +41,7 @@
 
       <!--Line click-->
       <div class="line-wrap">
-        <div :style="{left: this.positionLine + 'px'}"
+        <div v-if="showLine" :style="{left: this.positionLine + 'px'}"
              class="line"/>
       </div>
     </div>
@@ -82,6 +82,10 @@ export default {
     showNameProject: {
       type: Boolean,
       default: false
+    },
+    showLine: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -108,12 +112,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/variable.scss";
+
 .pms-chart__chart {
   position: relative;
   width: fit-content;
+  background-color: $main-bg;
+
   .chart__list {
     padding: 20px 0 0 0;
     margin-bottom: 0;
+    position: relative;
+    z-index: 1;
 
     h3 {
       user-select: none;
@@ -125,7 +135,7 @@ export default {
     top: 0;
     left: 0;
     display: flex;
-    z-index: -1;
+    z-index: 0;
     li {
       flex-shrink: 0;
       display: flex;
@@ -158,11 +168,9 @@ export default {
     top: 0;
     left: 0;
     height: 100%;
-    border-left: 1px dashed #333333;
+    border-left: 1px dashed $main-color;
     z-index: 2;
   }
-
-
 }
 
 .project__list {

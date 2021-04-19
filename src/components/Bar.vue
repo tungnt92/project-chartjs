@@ -109,6 +109,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import "../scss/variable.scss";
+
   .pms-chart__bar-wrap {
     position: relative;
     height: 21px;
@@ -121,7 +123,7 @@ export default {
       transition: .3s ease-in-out;
 
       &:hover {
-        border: 1px solid #000;
+        border: 1px solid $main-color;
       }
 
       &:not(:first-child) {

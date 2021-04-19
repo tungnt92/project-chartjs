@@ -5,7 +5,7 @@
          :key="index">
       <div class="project__name"
            @click.prevent="collapseProject(project.name)"
-            v-if="options.show_Name_Project">
+            v-if="options.show_name_project">
         <h3 v-text="project.name"/>
 
         <a-icon v-if="options.collapse"
@@ -70,6 +70,8 @@
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/variable.scss";
+
 .pms-chart__project {
   padding: 20px 15px 0;
   .project__name {
@@ -82,6 +84,7 @@
       margin-bottom: 0;
       font-weight: 500;
       font-size: 16.38px!important;
+      color: $main-color;
     }
   }
 }
