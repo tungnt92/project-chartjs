@@ -1,6 +1,6 @@
 <template>
   <div style="overflow: hidden">
-    <div class="chart"
+    <div class="pms-chart__chart"
          ref="chart"
          @click.prevent="$emit('clickChart', $event)">
       <ul class="chart__list"
@@ -108,7 +108,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.chart {
+.pms-chart__chart {
   position: relative;
   width: fit-content;
   &__list {

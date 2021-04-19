@@ -1,5 +1,5 @@
 <template>
-  <div class="duration">
+  <div class="pms-chart__duration">
     <ul>
       <li v-for="(date, index) in durations" :style="{'width': date.days*10 + 'px'}">
         <span :key="index" v-text="date.date" />
@@ -48,7 +48,7 @@ import * as moment from 'moment'
 </script>
 
 <style lang="scss" scoped>
-  .duration {
+  .pms-chart__duration {
     ul {
       display: flex;
       padding: 0 0 0 50px;

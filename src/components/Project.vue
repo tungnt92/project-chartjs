@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="project"
+    <div class="pms-chart__project"
          v-for="(project, index) in data.projects"
          :key="index">
       <div class="project__name"
@@ -70,9 +70,9 @@
 </script>
 
 <style lang="scss" scoped>
-.project {
+.pms-chart__project {
   padding: 20px 15px 0;
-  &__name {
+  .project__name {
     display: flex;
     justify-content: space-between;
     align-items: center;

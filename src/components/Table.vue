@@ -1,10 +1,10 @@
 <template>
-    <div class="table-container">
+    <div class="pms-chart__table-container">
       <a-spin :spinning="loading" size="large">
         <div class="table-wrap"
              :style="{'max-height': options.scroll ? '400px' : 'unset',
                        'overflow': loading ? 'unset' : 'auto'}"
-              :class="showPopup ? 'show-infor' : ''">
+              :class="showPopup ? 'show-infor' : 'hide-infor'">
 
         <div class="project-col">
           <h3 class="project__title" v-text="'Project'" />
@@ -28,27 +28,7 @@
                    :show-name-project="options.show_Name_Project"
                    :positionLine="positionLine"/>
 
-            <div class="data-popup" v-show="showPopup">
-              <h3 class="popup-header">
-                {{ currentDay }}
-                <button @click="showPopup = false" class="btn-close">&#215;</button>
-              </h3>
-              <h3 v-if="isEmpty(dataFilter)" class="infor-warning">Không có dữ liệu</h3>
-              <div class="project-wrap" v-for="(value, key) in dataFilter" :key="key">
-
-                <h3>Project: {{ key }}</h3>
-
-                <ul class="project__list" >
-                  <li class="list__item"
-                      v-for="(item, index) in value"
-                      :key="index">
-                    <p v-text="`Member: ${item.member}`" />
-                    <p v-text="`Position: ${item.position}`" />
-                    <p v-text="`Work Status: ${item.work_status}`" />
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <SideBar :current-day="currentDay" :data="dataFilter" :show-popup="showPopup" @close="showPopup = !showPopup"/>
           </div>
         </div>
       </div>
@@ -57,10 +37,10 @@
 </template>
 
 <script>
-// import Projects from '../projects.json'
 import Duration from './Duration.vue';
 import Project from './Project.vue';
 import Chart from './Chart.vue';
+import SideBar from './SideBar.vue';
 import * as moment from "moment";
 import {groupBy} from "lodash";
 
@@ -70,13 +50,13 @@ export default {
   components: {
     Duration,
     Project,
-    Chart
+    Chart,
+    SideBar
   },
 
   data () {
     return {
       loading: false,
-      // use for dev
       project: {},
       options: {},
       showPopup: false,
@@ -87,7 +67,6 @@ export default {
   },
 
   mounted() {
-    // use for build
     window.projectChart.$on('chartOptions', (options) => {
       this.options = options
     })
@@ -102,11 +81,6 @@ export default {
     window.projectChart.$on('loading', (loading) => {
       this.loading = loading
     })
-
-    // use for dev
-    // this.project.projects.forEach(obj => {
-    //   obj.open = true;
-    // })
   },
 
   methods: {
@@ -152,22 +126,13 @@ export default {
       })
 
       this.dataFilter = groupBy(dataFilter, 'project')
-    },
-
-    isEmpty(obj) {
-      for (let prop in obj) {
-        if (obj.hasOwnProperty(prop)) {
-          return false;
-        }
-      }
-      return true
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .table-container {
+  .pms-chart__table-container {
     box-shadow: 0 0 4px 0 rgba(0,0,0,.5);
     padding: 20px;
     border-radius: 20px;
@@ -176,9 +141,9 @@ export default {
   .table-wrap {
     display: flex;
     border-radius: 20px;
+
     &.show-infor {
-      width: 100%;
-      animation: fadeTable .2s linear forwards;
+      animation: fadeTable .3s linear forwards;
     }
 
     .project-col {
@@ -224,86 +189,7 @@ export default {
       height: fit-content;
     }
   }
-  .data-popup {
-    display: block;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 10;
-    background-color: #ffffff;
-    width: 0;
-    border: 1px solid #cccccc;
-    max-height: 100%;
-    overflow-y: scroll;
-    min-height: 100%;
-    animation: fadePopup .2s linear forwards;
 
-    .project-wrap {
-      padding: 15px;
-      border-right: 0;
-
-      &:not(:last-child) {
-        padding-bottom: 10px;
-        margin-bottom: 10px;
-        border-bottom: 1px solid #ccc;
-      }
-    }
-
-    .popup-header {
-      padding: 15px;
-      position: sticky;
-      top: 0;
-      background-color: #e3e3e3;
-      border-bottom: 1px solid rgba(0,0,0,.125);
-    }
-    .infor-warning {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      text-align: center;
-    }
-    .btn-close {
-      content: "\00D7";
-      position: absolute;
-      right: 5px;
-      top: 5px;
-      border-radius: 50%;
-      border: 0;
-      cursor: pointer;
-      font-size: 16px;
-      padding: 4px 10px;
-      &:hover {
-        background: #ddd;
-        color: #ffffff;
-      }
-      &:focus {
-        outline: none;
-      }
-    }
-    ul {
-      list-style: none;
-      padding: 0 10px;
-
-      li {
-        border-bottom: 1px solid rgba(0,0,0,.125);
-        white-space: nowrap;
-        margin-bottom: 10px;
-        &:last-child {
-          border-bottom: 0;
-        }
-      }
-    }
-  }
-  @keyframes fadePopup {
-    from {
-      width: 0;
-    }
-    to {
-      width: 250px;
-    }
-  }
   @keyframes fadeTable {
     from {
       width: 100%;

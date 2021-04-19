@@ -1,5 +1,5 @@
 <template>
-    <li class="bar-wrap" :style="{'width': maxWidth + 'px'}">
+    <li class="pms-chart__bar-wrap" :style="{'width': maxWidth + 'px'}">
       <span class="bar" v-for="(work, index) in data"
             :key="index"
             :style="{
@@ -109,7 +109,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .bar-wrap {
+  .pms-chart__bar-wrap {
     position: relative;
     height: 21px;
     overflow: hidden;
