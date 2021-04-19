@@ -3,7 +3,7 @@
       <a-spin :spinning="loading"
               class="custom-spin-container"
               size="large">
-        <div class="table-chart-wrapper"
+        <div v-dragscroll.x class="table-chart-wrapper"
              :style="{'max-height': options.scroll ? '400px' : 'unset',
                        'overflow': loading ? 'unset' : 'auto'}"
               :class="showPopup ? 'show-infor' : 'hide-infor'">
