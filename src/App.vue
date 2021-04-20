@@ -52,7 +52,7 @@
   .chart-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 50px;
+    padding: 0;
     --main-bg: #ffffff;
     --main-color: rgba(0, 0, 0, 0.65);
     --main-color-dim: #e3e3e3;
