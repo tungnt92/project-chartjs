@@ -92,7 +92,7 @@ export default {
   }
 
   .popup-header {
-    padding: 10px;
+    padding: 10.5px;
     position: sticky;
     top: 0;
     display: flex;
