@@ -1,10 +1,11 @@
 <template>
   <div>
-    <div class="project"
+    <div class="pms-chart__project"
          v-for="(project, index) in data.projects"
          :key="index">
       <div class="project__name"
-           @click.prevent="collapseProject(project.name)">
+           @click.prevent="collapseProject(project.name)"
+            v-if="options.show_name_project">
         <h3 v-text="project.name"/>
 
         <a-icon v-if="options.collapse"
@@ -16,7 +17,7 @@
         <li class="list__item"
             v-for="(item, index) in project.position"
             :key="index">
-          <p v-text="`. ${item.members.length} ${ item.name}`" />
+          <p v-text="`${ item.name} (total: ${item.members.length})`" />
 
           <ul class="item__member-list">
             <li v-for="(member, i) in item.members"
@@ -69,9 +70,11 @@
 </script>
 
 <style lang="scss" scoped>
-.project {
+@import "../scss/variable.scss";
+
+.pms-chart__project {
   padding: 20px 15px 0;
-  &__name {
+  .project__name {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -81,6 +84,7 @@
       margin-bottom: 0;
       font-weight: 500;
       font-size: 16.38px!important;
+      color: $main-color;
     }
   }
 }

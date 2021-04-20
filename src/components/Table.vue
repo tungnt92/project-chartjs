@@ -1,10 +1,12 @@
 <template>
-    <div class="table-container">
-      <a-spin :spinning="loading" size="large">
-        <div class="table-wrap"
+    <div class="pms-chart__table-container">
+      <a-spin :spinning="loading"
+              class="custom-spin-container"
+              size="large">
+        <div v-dragscroll.x class="table-chart-wrapper"
              :style="{'max-height': options.scroll ? '400px' : 'unset',
                        'overflow': loading ? 'unset' : 'auto'}"
-              :class="showPopup ? 'show-infor' : ''">
+              :class="showPopup ? 'show-infor' : 'hide-infor'">
 
         <div class="project-col">
           <h3 class="project__title" v-text="'Project'" />
@@ -25,29 +27,15 @@
             <Chart @clickChart="getCurrentDate"
                    :data="project" :start-date="project.start_time"
                    :type-format="options.date_format"
+                   :show-name-project="options.show_name_project"
+                   :show-line="showLine"
                    :positionLine="positionLine"/>
 
-            <div class="data-popup" v-show="showPopup">
-              <h3 class="popup-header">
-                {{ currentDay }}
-                <button @click="showPopup = false" class="btn-close">x</button>
-              </h3>
-              <h3 v-if="isEmpty(dataFilter)" class="infor-warning">Không có dữ liệu</h3>
-              <div class="project-wrap" v-for="(value, key) in dataFilter" :key="key">
-
-                <h3>Project: {{ key }}</h3>
-
-                <ul class="project__list" >
-                  <li class="list__item"
-                      v-for="(item, index) in value"
-                      :key="index">
-                    <p v-text="`Member: ${item.member}`" />
-                    <p v-text="`Position: ${item.position}`" />
-                    <p v-text="`Work Status: ${item.work_status}`" />
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <SideBar :current-day="currentDay"
+                     :data="dataFilter"
+                     :show-popup="showPopup"
+                     :options="options"
+                     @close="closePopUp"/>
           </div>
         </div>
       </div>
@@ -56,10 +44,11 @@
 </template>
 
 <script>
-// import Projects from '../projects.json'
 import Duration from './Duration.vue';
 import Project from './Project.vue';
 import Chart from './Chart.vue';
+import SideBar from './SideBar.vue';
+import isEmpty from '../helpers';
 import * as moment from "moment";
 import {groupBy} from "lodash";
 
@@ -69,16 +58,23 @@ export default {
   components: {
     Duration,
     Project,
-    Chart
+    Chart,
+    SideBar
+  },
+
+  props: {
+    options: {
+      type: Object,
+      default: () => {}
+    }
   },
 
   data () {
     return {
       loading: false,
-      // use for dev
       project: {},
-      options: {},
       showPopup: false,
+      showLine: false,
       dataFilter: {},
       currentDay: '',
       positionLine: 0
@@ -86,11 +82,6 @@ export default {
   },
 
   mounted() {
-    // use for build
-    window.projectChart.$on('chartOptions', (options) => {
-      this.options = options
-    })
-
     window.projectChart.$on('chartData', (data) => {
       this.project = data
       this.project.projects.forEach(obj => {
@@ -101,11 +92,6 @@ export default {
     window.projectChart.$on('loading', (loading) => {
       this.loading = loading
     })
-
-    // use for dev
-    // this.project.projects.forEach(obj => {
-    //   obj.open = true;
-    // })
   },
 
   methods: {
@@ -123,6 +109,7 @@ export default {
 
     getCurrentDate(e) {
       this.showPopup = true;
+      this.showLine = true
       this.positionLine = e.offsetX + e.target.offsetLeft
       let totalDay = Math.floor((this.positionLine/ 10))
       let currentDate = moment(this.project.start_time, this.options.date_format).add(totalDay, 'days')
@@ -153,30 +140,34 @@ export default {
       this.dataFilter = groupBy(dataFilter, 'project')
     },
 
-    isEmpty(obj) {
-      for (let prop in obj) {
-        if (obj.hasOwnProperty(prop)) {
-          return false;
-        }
-      }
-      return true
+    closePopUp () {
+      this.showPopup = false
+      this.showLine = false
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .table-container {
+  @import "../scss/variable.scss";
+
+  .pms-chart__table-container {
     box-shadow: 0 0 4px 0 rgba(0,0,0,.5);
     padding: 20px;
     border-radius: 20px;
+    background-color: $main-bg;
   }
 
-  .table-wrap {
+  .custom-spin-container {
+    overflow: hidden;
+  }
+
+  .table-chart-wrapper {
     display: flex;
     border-radius: 20px;
+
     &.show-infor {
-      width: calc(100% - 250px);
+      animation: fadeTable .3s linear forwards;
     }
 
     .project-col {
@@ -184,7 +175,7 @@ export default {
       display: flex;
       flex-flow: column;
       left: 0;
-      background-color: #ffffff;
+      background-color: $main-bg;
       z-index: 4;
       height: fit-content;
       width: 180px;
@@ -195,21 +186,22 @@ export default {
       margin: 0;
       padding: 15px;
       font-size: 16px !important;
-      border-bottom: 1px solid #000;
-      border-right: 1px solid #000;
+      color: $main-color;
+      border-bottom: 1px solid $main-color;
+      border-right: 1px solid $main-color;
     }
 
     .project-wrap {
-      border-right: 1px solid #000;
+      border-right: 1px solid $main-color;
       padding-bottom: 20px;
-      background-color: #ffffff;
+      background-color: $main-bg;
       z-index: 2;
     }
 
     .chart__timeline, .project__title {
       position: sticky;
       top: 0;
-      background-color: #ffffff;
+      background-color: $main-bg;
       z-index: 3;
     }
 
@@ -220,75 +212,35 @@ export default {
 
     .chart-col {
       height: fit-content;
+      background-color: $main-bg;
     }
   }
-  .data-popup {
-    display: block;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 10;
-    background-color: #ffffff;
-    width: 250px;
-    border: 1px solid #cccccc;
-    max-height: 100%;
-    overflow-y: scroll;
-    min-height: 100%;
 
-    .project-wrap {
-      padding: 15px;
-      border-right: 0;
-
-      &:not(:last-child) {
-        padding-bottom: 10px;
-        margin-bottom: 10px;
-        border-bottom: 1px solid #ccc;
-      }
-    }
-
-    .popup-header {
-      padding: 15px;
-      position: sticky;
-      top: 0;
-      background-color: #e3e3e3;
-      border-bottom: 1px solid rgba(0,0,0,.125);
-    }
-    .infor-warning {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+  @keyframes fadeTable {
+    from {
       width: 100%;
-      text-align: center;
     }
-    .btn-close {
-      position: absolute;
-      right: 5px;
-      top: 5px;
-      border-radius: 50%;
-      border: 0;
-      cursor: pointer;
-      font-size: 10px;
-      &:hover {
-        background: #ddd;
-        color: #ffffff;
-      }
-      &:focus {
-        outline: none;
-      }
+    to {
+      width: calc(100% - 250px);
     }
-    ul {
-      list-style: none;
-      padding: 0 10px;
+  }
+  ::-webkit-scrollbar-track
+  {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+  }
 
-      li {
-        border-bottom: 1px solid rgba(0,0,0,.125);
-        white-space: nowrap;
-        margin-bottom: 10px;
-        &:last-child {
-          border-bottom: 0;
-        }
-      }
-    }
+  ::-webkit-scrollbar
+  {
+    width: 5px;
+    height: 5px;
+    background-color: #F5F5F5;
+  }
+  ::-webkit-scrollbar-thumb
+  {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #c1c1c1;
   }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div ref="popup" class="popup-wrap" :style="direction()">
+  <div ref="popup" class="pms-chart__popup-wrap" :style="direction()">
     <h3>
       <strong>Project: </strong> {{data.project_name}}
     </h3>
@@ -75,18 +75,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .popup-wrap {
+  @import "../scss/variable.scss";
+
+  .pms-chart__popup-wrap {
     min-width: 100px;
     border-radius: 10px;
     border: 1px solid #ccc;
     position: fixed;
     z-index: 3;
-    background-color: #ffffff;
+    background-color: $main-bg;
     padding: 15px;
     white-space: nowrap;
 
     h3 {
-      border-bottom: 1px solid #cccccc;
+      border-bottom: 1px solid $main-color;
+      color: $main-color;
       padding-bottom: 10px;
     }
 

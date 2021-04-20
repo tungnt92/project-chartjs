@@ -1,13 +1,13 @@
 <template>
   <div style="overflow: hidden">
-    <div class="chart"
+    <div class="pms-chart__chart"
          ref="chart"
          @click.prevent="$emit('clickChart', $event)">
       <ul class="chart__list"
           v-for="(project, index) in data.projects"
           :key="index"
       >
-        <h3 >&#8203;</h3>
+        <h3 v-if="showNameProject">&#8203;</h3>
 
         <template v-if="'open' in project && project.open"
         >
@@ -41,7 +41,7 @@
 
       <!--Line click-->
       <div class="line-wrap">
-        <div :style="{left: this.positionLine + 'px'}"
+        <div v-if="showLine" :style="{left: this.positionLine + 'px'}"
              class="line"/>
       </div>
     </div>
@@ -78,6 +78,14 @@ export default {
     positionLine: {
       type: Number,
       default: 0
+    },
+    showNameProject: {
+      type: Boolean,
+      default: false
+    },
+    showLine: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -104,24 +112,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.chart {
+@import "../scss/variable.scss";
+
+.pms-chart__chart {
   position: relative;
   width: fit-content;
-  &__list {
+  cursor: pointer;
+  background-color: $main-bg;
+
+  .chart__list {
     padding: 20px 0 0 0;
     margin-bottom: 0;
+    position: relative;
+    z-index: 1;
 
     h3 {
       user-select: none;
     }
   }
-  &__frame {
+  .chart__frame {
     position: absolute;
     height: 100%;
     top: 0;
     left: 0;
     display: flex;
-    z-index: -1;
+    z-index: 0;
     li {
       flex-shrink: 0;
       display: flex;
@@ -139,13 +154,13 @@ export default {
       }
     }
   }
-  &__item {
+  .chart__item {
     margin-bottom: 10px;
     &:last-child {
       margin-bottom: 0;
     }
   }
-  &__position {
+  .chart__position {
     margin-bottom: 10px;
   }
 
@@ -154,11 +169,9 @@ export default {
     top: 0;
     left: 0;
     height: 100%;
-    border-left: 1px dashed #333333;
+    border-left: 1px dashed $main-color;
     z-index: 2;
   }
-
-
 }
 
 .project__list {

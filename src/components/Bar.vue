@@ -1,5 +1,5 @@
 <template>
-    <li class="bar-wrap" :style="{'width': maxWidth + 'px'}">
+    <li class="pms-chart__bar-wrap" :style="{'width': maxWidth + 'px'}">
       <span class="bar" v-for="(work, index) in data"
             :key="index"
             :style="{
@@ -109,7 +109,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .bar-wrap {
+  @import "../scss/variable.scss";
+
+  .pms-chart__bar-wrap {
     position: relative;
     height: 21px;
     overflow: hidden;
@@ -121,7 +123,7 @@ export default {
       transition: .3s ease-in-out;
 
       &:hover {
-        border: 1px solid #000;
+        border: 1px solid $main-color;
       }
 
       &:not(:first-child) {

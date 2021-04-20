@@ -42,7 +42,7 @@ module.exports = {
     // The injected script tag contains a src value of the
     // filename output defined above.
     new HtmlWebpackPlugin({
-      inject: true,
+      inject: false,
       template: resolveAppPath('src/index.html'),
     }),
     new VueLoaderPlugin(),
