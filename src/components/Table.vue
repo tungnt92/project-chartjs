@@ -3,7 +3,7 @@
       <a-spin :spinning="loading"
               class="custom-spin-container"
               size="large">
-        <div class="table-chart-wrapper"
+        <div v-dragscroll.x class="table-chart-wrapper"
              :style="{'max-height': options.scroll ? '400px' : 'unset',
                        'overflow': loading ? 'unset' : 'auto'}"
               :class="showPopup ? 'show-infor' : 'hide-infor'">
@@ -62,17 +62,17 @@ export default {
     SideBar
   },
 
+  props: {
+    options: {
+      type: Object,
+      default: () => {}
+    }
+  },
+
   data () {
     return {
       loading: false,
       project: {},
-      options: {
-        scroll: false,
-        date_format: 'YYYY-MM-DD',
-        dark_mode: false,
-        show_name_project: true,
-        collapse: false
-      },
       showPopup: false,
       showLine: false,
       dataFilter: {},
@@ -82,12 +82,6 @@ export default {
   },
 
   mounted() {
-    window.projectChart.$on('chartOptions', (options) => {
-      if (!isEmpty(options)) {
-        this.options = {...this.options, ...options}
-      }
-    })
-
     window.projectChart.$on('chartData', (data) => {
       this.project = data
       this.project.projects.forEach(obj => {

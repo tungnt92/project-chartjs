@@ -1,6 +1,7 @@
 <template>
-  <div class="chart-container" :class="{ 'full-width': options.full_width, 'dark-mode': options.dark_mode }">
-    <ChartTable />
+  <div class="chart-container"
+       :class="{ 'full-width': options.full_width, 'dark-mode':  options.dark_mode  }">
+    <ChartTable :options="options" @changeMode="options = $event"/>
 
     <PopUp v-if="showPopup" :data="popupData"/>
   </div>
@@ -21,8 +22,12 @@
     data () {
       return {
         options: {
+          scroll: false,
+          date_format: 'YYYY-MM-DD',
+          dark_mode: false,
+          show_name_project: true,
+          collapse: false,
           full_width: false,
-          dark_mode: false
         }
       }
     },
@@ -47,7 +52,7 @@
   .chart-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 50px;
+    padding: 0;
     --main-bg: #ffffff;
     --main-color: rgba(0, 0, 0, 0.65);
     --main-color-dim: #e3e3e3;

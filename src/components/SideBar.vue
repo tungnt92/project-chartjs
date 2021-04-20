@@ -72,7 +72,7 @@ export default {
   background-color: $main-bg;
   border: 1px solid #cccccc;
   max-height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   min-height: 100%;
 
   .project-wrap {
@@ -92,7 +92,7 @@ export default {
   }
 
   .popup-header {
-    padding: 15px;
+    padding: 10.5px;
     position: sticky;
     top: 0;
     display: flex;
@@ -110,6 +110,7 @@ export default {
     transform: translate(-50%, -50%);
     width: 100%;
     text-align: center;
+    color: $main-color;
   }
   .btn-close {
     content: "\00D7";

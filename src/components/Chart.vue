@@ -117,6 +117,7 @@ export default {
 .pms-chart__chart {
   position: relative;
   width: fit-content;
+  cursor: pointer;
   background-color: $main-bg;
 
   .chart__list {
