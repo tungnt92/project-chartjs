@@ -27,7 +27,7 @@
           dark_mode: false,
           show_name_project: true,
           collapse: false,
-          full_width: false,
+          full_width: false
         }
       }
     },
