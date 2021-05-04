@@ -1,12 +1,9 @@
 <template>
     <div class="pms-chart__table-container">
-      <a-spin :spinning="loading"
-              class="custom-spin-container"
-              size="large">
-        <div v-dragscroll.x class="table-chart-wrapper"
-             :style="{'max-height': options.scroll ? '400px' : 'unset',
-                       'overflow': loading ? 'unset' : 'auto'}"
-              :class="showPopup ? 'show-infor' : 'hide-infor'">
+      <div v-dragscroll.x class="table-chart-wrapper"
+           :style="{'max-height': options.scroll ? '400px' : 'unset',
+                       'overflow': 'auto'}"
+           :class="showPopup ? 'show-infor' : 'hide-infor'">
 
         <div class="project-col">
           <h3 class="project__title" v-text="'Project'" />
@@ -15,6 +12,14 @@
             <Project :data="project"
                      :options="options"
                      @handleCollapse="handleCollapse($event)"/>
+
+            <div class="skeleton">
+              <!--Skeleton-->
+              <a-skeleton active
+                          :loading="loading"
+                          :title="false"
+                          :paragraph="{ rows: 10 , width: [`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`]}"></a-skeleton>
+            </div>
           </div>
         </div>
 
@@ -36,10 +41,18 @@
                      :show-popup="showPopup"
                      :options="options"
                      @close="closePopUp"/>
+
+            <!--Lazyload-->
+            <div class="skeleton">
+              <!--Skeleton-->
+              <a-skeleton active
+                          :loading="loading"
+                          :title="false"
+                          :paragraph="{ rows: 10 , width: '100%'}"></a-skeleton>
+            </div>
           </div>
         </div>
       </div>
-      </a-spin>
     </div>
 </template>
 
@@ -51,6 +64,9 @@ import SideBar from './SideBar.vue';
 import isEmpty from '../helpers';
 import * as moment from "moment";
 import {groupBy} from "lodash";
+import Vue from 'vue'
+import {Skeleton} from 'ant-design-vue'
+Vue.use(Skeleton);
 
 export default {
   name: 'ChartTable',
@@ -89,7 +105,11 @@ export default {
       })
     })
 
-    window.projectChart.$on('loading', (loading) => {
+    window.projectChart.$on('chartLazyLoad', (loading) => {
+      if (loading) {
+        this.project = {}
+      }
+
       this.loading = loading
     })
   },
@@ -192,6 +212,7 @@ export default {
     }
 
     .project-wrap {
+      position: relative;
       border-right: 1px solid $main-color;
       padding-bottom: 20px;
       background-color: $main-bg;
@@ -206,6 +227,7 @@ export default {
     }
 
     .chart__wrap {
+      position: relative;
       padding-bottom: 10px;
       margin-left: 50px;
     }
@@ -242,5 +264,15 @@ export default {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #c1c1c1;
+  }
+
+  .pms-chart__table-container {
+    .skeleton {
+      margin-top: 50px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
   }
 </style>
