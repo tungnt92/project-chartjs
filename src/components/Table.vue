@@ -1,54 +1,56 @@
 <template>
     <div class="pms-chart__table-container">
-      <div v-dragscroll.x class="table-chart-wrapper"
-           :style="{'max-height': options.scroll ? '400px' : 'unset',
+      <div class="custom-spin-container">
+        <div v-dragscroll.x class="table-chart-wrapper"
+             :style="{'max-height': options.scroll ? '400px' : 'unset',
                        'overflow': 'auto'}"
-           :class="showPopup ? 'show-infor' : 'hide-infor'">
+             :class="showPopup ? 'show-infor' : 'hide-infor'">
 
-        <div class="project-col">
-          <h3 class="project__title" v-text="'Project'" />
+          <div class="project-col">
+            <h3 class="project__title" v-text="'Project'" />
 
-          <div class="project-wrap" :style="{'min-height': (!project.projects) ? '400px' : 'unset'}">
-            <Project :data="project"
-                     :options="options"
-                     @handleCollapse="handleCollapse($event)"/>
+            <div class="project-wrap" :style="{'min-height': (!project.projects) ? '400px' : 'unset'}">
+              <Project :data="project"
+                       :options="options"
+                       @handleCollapse="handleCollapse($event)"/>
 
-            <div class="skeleton">
-              <!--Skeleton-->
-              <a-skeleton active
-                          :loading="loading"
-                          :title="false"
-                          :paragraph="{ rows: 10 , width: [`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`]}"></a-skeleton>
+              <div class="skeleton">
+                <!--Skeleton-->
+                <a-skeleton active
+                            :loading="loading"
+                            :title="false"
+                            :paragraph="{ rows: 10 , width: [`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`]}"></a-skeleton>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="chart-col">
-          <div class="chart__timeline">
-            <Duration :start-date="project.start_time" :type-format="options.date_format"/>
-          </div>
+          <div class="chart-col">
+            <div class="chart__timeline">
+              <Duration :start-date="project.start_time" :type-format="options.date_format"/>
+            </div>
 
-          <div class="chart__wrap">
-            <Chart @clickChart="getCurrentDate"
-                   :data="project" :start-date="project.start_time"
-                   :type-format="options.date_format"
-                   :show-name-project="options.show_name_project"
-                   :show-line="showLine"
-                   :positionLine="positionLine"/>
+            <div class="chart__wrap">
+              <Chart @clickChart="getCurrentDate"
+                     :data="project" :start-date="project.start_time"
+                     :type-format="options.date_format"
+                     :show-name-project="options.show_name_project"
+                     :show-line="showLine"
+                     :positionLine="positionLine"/>
 
-            <SideBar :current-day="currentDay"
-                     :data="dataFilter"
-                     :show-popup="showPopup"
-                     :options="options"
-                     @close="closePopUp"/>
+              <SideBar :current-day="currentDay"
+                       :data="dataFilter"
+                       :show-popup="showPopup"
+                       :options="options"
+                       @close="closePopUp"/>
 
-            <!--Lazyload-->
-            <div class="skeleton">
-              <!--Skeleton-->
-              <a-skeleton active
-                          :loading="loading"
-                          :title="false"
-                          :paragraph="{ rows: 10 , width: '100%'}"></a-skeleton>
+              <!--Lazyload-->
+              <div class="skeleton">
+                <!--Skeleton-->
+                <a-skeleton active
+                            :loading="loading"
+                            :title="false"
+                            :paragraph="{ rows: 10 , width: '100%'}"></a-skeleton>
+              </div>
             </div>
           </div>
         </div>
@@ -180,6 +182,7 @@ export default {
 
   .custom-spin-container {
     overflow: hidden;
+    position: relative;
   }
 
   .table-chart-wrapper {
@@ -212,7 +215,6 @@ export default {
     }
 
     .project-wrap {
-      position: relative;
       border-right: 1px solid $main-color;
       padding-bottom: 20px;
       background-color: $main-bg;
@@ -227,7 +229,6 @@ export default {
     }
 
     .chart__wrap {
-      position: relative;
       padding-bottom: 10px;
       margin-left: 50px;
     }
@@ -269,7 +270,6 @@ export default {
   .pms-chart__table-container {
     .skeleton {
       margin-top: 50px;
-      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
