@@ -143,12 +143,12 @@ export default {
       &:first-child {
         span {
           &:first-child {
-            border-left: 1px solid #e3e3e3;
+            border-left: 1px solid $main-line-color;
           }
         }
       }
       span {
-        border-right: 1px solid #e3e3e3;
+        border-right: 1px solid $main-line-color;
         width: 100%;
         display: block;
       }
@@ -169,7 +169,7 @@ export default {
     top: 0;
     left: 0;
     height: 100%;
-    border-left: 1px dashed $main-color;
+    border-left: 1px dashed $main-line-color;
     z-index: 2;
   }
 }

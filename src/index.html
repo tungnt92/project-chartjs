@@ -287,6 +287,10 @@
           }
         ]
       })
+      window.projectChart.$emit('chartOptions', {
+        text_color: '#ffffff',
+        background_color: '#555555'
+      })
     } else {
       window.projectChart.$emit('chartData', {
         "start_time": "2020-04-09",
@@ -478,6 +482,10 @@
             ]
           }
         ]
+      })
+      window.projectChart.$emit('chartOptions', {
+        text_color: '#555555',
+        background_color: '#ffffff'
       })
     }
     window.projectChart.$emit('chartOptions', {
