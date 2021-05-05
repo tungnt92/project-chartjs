@@ -14,7 +14,7 @@
                        :options="options"
                        @handleCollapse="handleCollapse($event)"/>
 
-              <div class="skeleton">
+              <div class="skeleton" v-if="loading">
                 <!--Skeleton-->
                 <a-skeleton active
                             :loading="loading"
@@ -44,7 +44,7 @@
                        @close="closePopUp"/>
 
               <!--Lazyload-->
-              <div class="skeleton">
+              <div class="skeleton" v-if="loading">
                 <!--Skeleton-->
                 <a-skeleton active
                             :loading="loading"
