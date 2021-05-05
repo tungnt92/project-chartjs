@@ -46,6 +46,7 @@ $ npm run start
 
 # Add Library
 ```
+<div id="app"></div>
 <script src="./node_modules/project-chartjs/dist/build/bundle.js"></script>
 ```
 
