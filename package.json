@@ -2,7 +2,7 @@
   "name": "project-chartjs",
   "version": "1.0.0",
   "description": "",
-  "main": "./lib/index.js",
+  "main": "./dist/build/bundle.js",
   "scripts": {
     "start": "node_modules/.bin/webpack serve --hot",
     "clean": "rimraf lib",
@@ -17,7 +17,7 @@
     "prepublish": "npm run clean && npm run lint && npm run test && npm run build"
   },
   "files": [
-    "lib",
+    "dist",
     "src"
   ],
   "repository": {
