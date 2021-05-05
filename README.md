@@ -44,301 +44,80 @@ $ npm run start
 - `yarn build` - Babel will transpile ES6 => ES5 and minify the code.
 - `yarn prepublish` - Hook for npm. Do all the checks before publishing your module.
 
-# License
-
-MIT © gumiviet
-
 # Add Library
 ```
-<script src="build/bundle.js"></script>
+<div id="app"></div>
+<script src="./node_modules/project-chartjs/dist/build/bundle.js"></script>
 ```
 
-# Import Sample Data
+# Sample Chart Data
 ```
-window.projectChart.$emit('chartData', {
-    "start_time": "2020-04-09",
-    "end_time": "2020-05-06",
+const data =
+{
+    "start_time": "yyyy-mm-dd",
+    "end_time": "yyyy-mm-dd",
     "projects": [
-      {
-        "id": 1,
-        "name": "Asura",
-        "position": [
-          {
-            "name": "FE",
-            "members": [
-              {
-                "id": 1,
-                "name": "Tun",
-                "bg_color": "#eb4034",
-                "work": [
-                  {
-                    "join_date": "2020-04-04",
-                    "leave_date": "2020-04-16",
-                    "work_status": 1
-                  },
-                  {
-                    "join_date": "2020-05-06",
-                    "leave_date": "2020-05-16",
-                    "work_status": 0.5
-                  }
-                ]
-              },
-              {
-                "id": 2,
-                "name": "Tim",
-                "bg_color": "#ebeb34",
-                "work": [
-                  {
-                    "join_date": "2020-04-06",
-                    "leave_date": "2020-05-06",
-                    "work_status": 1
-                  },
-                  {
-                    "join_date": "2020-05-06",
-                    "leave_date": "2020-05-16",
-                    "work_status": 0.5
-                  }
-                ]
-              },
-              {
-                "id": 3,
-                "name": "Kuro",
-                "bg_color": "#eba234",
-                "work": [
-                  {
-                    "join_date": "2020-04-06",
-                    "leave_date": "2020-05-06",
-                    "work_status": 1
-                  },
-                  {
-                    "join_date": "2020-05-06",
-                    "leave_date": "2020-05-16",
-                    "work_status": 0.5
-                  }
-                ]
-              }
+        {
+            "id": 1,
+            "name": "Sample Project",
+            "position": [
+                {
+                    "name": "FE",
+                    "members": [
+                        {
+                            "id": 1,
+                            "name": "John",
+                            "bg_color": "#eb4034",
+                            "work": [
+                                {
+                                    "join_date": "yyyy-mm-dd",
+                                    "leave_date": "yyyy-mm-dd",
+                                    "work_status": 1
+                                },
+                                ...
+                            ]
+                        },
+                        ...
+                    ]
+                },
+                ...
             ]
-          },
-          {
-            "name": "BE",
-            "members": [
-              {
-                "id": 1,
-                "name": "Tun",
-                "bg_color": "#7deb34",
-                "work": [
-                  {
-                    "join_date": "2020-04-06",
-                    "leave_date": "2020-05-06",
-                    "work_status": 1
-                  },
-                  {
-                    "join_date": "2020-05-06",
-                    "leave_date": "2020-05-26",
-                    "work_status": 0.5
-                  }
-                ]
-              },
-              {
-                "id": 2,
-                "name": "Tim",
-                "bg_color": "#34d3eb",
-                "work": [
-                  {
-                    "join_date": "2020-04-06",
-                    "leave_date": "2020-05-06",
-                    "work_status": 1
-                  },
-                  {
-                    "join_date": "2020-05-06",
-                    "leave_date": "2020-05-20",
-                    "work_status": 0.5
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 2,
-        "name": "NewPho",
-        "position": [
-          {
-            "name": "FE",
-            "members": [
-              {
-                "id": 1,
-                "name": "Tun",
-                "bg_color": "#3477eb",
-                "work": [
-                  {
-                    "join_date": "2020-04-06",
-                    "leave_date": "2020-04-26",
-                    "work_status": 1
-                  },
-                  {
-                    "join_date": "2020-04-26",
-                    "leave_date": "2020-05-06",
-                    "work_status": 0.5
-                  }
-                ]
-              },
-              {
-                "id": 2,
-                "name": "Tim",
-                "bg_color": "#6e34eb",
-                "work": [
-                  {
-                    "join_date": "2020-04-06",
-                    "leave_date": "2020-04-20",
-                    "work_status": 1
-                  },
-                  {
-                    "join_date": "2020-04-20",
-                    "leave_date": "2020-05-26",
-                    "work_status": 0.5
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "name": "BE",
-            "members": [
-              {
-                "id": 1,
-                "name": "Tun",
-                "bg_color": "#b734eb",
-                "work": [
-                  {
-                    "join_date": "2020-04-06",
-                    "leave_date": "2020-05-16",
-                    "work_status": 1
-                  },
-                  {
-                    "join_date": "2020-05-16",
-                    "leave_date": "2020-06-26",
-                    "work_status": 0.5
-                  }
-                ]
-              },
-              {
-                "id": 2,
-                "name": "Tim",
-                "bg_color": "#eb34ba",
-                "work": [
-                  {
-                    "join_date": "2020-04-06",
-                    "leave_date": "2020-05-06",
-                    "work_status": 1
-                  },
-                  {
-                    "join_date": "2020-05-06",
-                    "leave_date": "2020-06-26",
-                    "work_status": 0.5
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 3,
-        "name": "Dnavi",
-        "position": [
-          {
-            "name": "FE",
-            "members": [
-              {
-                "id": 1,
-                "name": "Tun",
-                "bg_color": "#ff8100",
-                "work": [
-                  {
-                    "join_date": "2020-04-06",
-                    "leave_date": "2020-04-26",
-                    "work_status": 1
-                  },
-                  {
-                    "join_date": "2020-04-26",
-                    "leave_date": "2020-05-06",
-                    "work_status": 0.5
-                  }
-                ]
-              },
-              {
-                "id": 2,
-                "name": "Tim",
-                "bg_color": "#ff8100",
-                "work": [
-                  {
-                    "join_date": "2020-04-06",
-                    "leave_date": "2020-04-20",
-                    "work_status": 1
-                  },
-                  {
-                    "join_date": "2020-04-20",
-                    "leave_date": "2020-05-26",
-                    "work_status": 0.5
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "name": "BE",
-            "members": [
-              {
-                "id": 1,
-                "name": "Tun",
-                "bg_color": "#ff8100",
-                "work": [
-                  {
-                    "join_date": "2020-04-06",
-                    "leave_date": "2020-05-16",
-                    "work_status": 1
-                  },
-                  {
-                    "join_date": "2020-05-16",
-                    "leave_date": "2020-06-26",
-                    "work_status": 0.5
-                  }
-                ]
-              },
-              {
-                "id": 2,
-                "name": "Tim",
-                "bg_color": "#eb34ba",
-                "work": [
-                  {
-                    "join_date": "2020-04-06",
-                    "leave_date": "2020-05-06",
-                    "work_status": 1
-                  },
-                  {
-                    "join_date": "2020-05-06",
-                    "leave_date": "2020-06-26",
-                    "work_status": 0.5
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
+        },
+        ...
     ]
-  })
+}
 ```
 
-# Import Sample Options
+# How To Import Data
+```
+window.projectChart.$emit('chartData', data)
+```
+
+# How To Show Lazyload
+```
+window.projectChart.$emit('chartLazyLoad', true)
+```
+
+# How To Import Options
 ```
 window.projectChart.$emit('chartOptions', {
     scroll: false,
     collapse: true,
     date_format: 'YYYY-MM-DD',
-    dark_mode: false,
-    show_name_project: false
+    ...
 })
 ```
+
+# Chart Options
+| Option  | Type | Default | Description |
+| :---: | :---: | :---: | :--- |
+| scroll | boolean | false | show or hide scroll bar in y-axis |
+| date_format | string | 'YYYY-MM-DD' | set date format of duration bar |
+| collapse | boolean | false | add collapse for each project in project list |
+| full_width | boolean | false | set width of container , default is max-width: 1200px |
+| text_color | string | '#555555' | set text color |
+| background_color | string | '#ffffff' | set background color |
+| show_name_project | boolean | true | show or hide project name |
+# License
+
+MIT © gumiviet

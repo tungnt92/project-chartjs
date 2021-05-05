@@ -1,45 +1,60 @@
 <template>
     <div class="pms-chart__table-container">
-      <a-spin :spinning="loading"
-              class="custom-spin-container"
-              size="large">
+      <div class="custom-spin-container">
         <div v-dragscroll.x class="table-chart-wrapper"
              :style="{'max-height': options.scroll ? '400px' : 'unset',
-                       'overflow': loading ? 'unset' : 'auto'}"
-              :class="showPopup ? 'show-infor' : 'hide-infor'">
+                       'overflow': 'auto'}"
+             :class="showPopup ? 'show-infor' : 'hide-infor'">
 
-        <div class="project-col">
-          <h3 class="project__title" v-text="'Project'" />
+          <div class="project-col">
+            <h3 class="project__title" v-text="'Project'" />
 
-          <div class="project-wrap" :style="{'min-height': (!project.projects) ? '400px' : 'unset'}">
-            <Project :data="project"
-                     :options="options"
-                     @handleCollapse="handleCollapse($event)"/>
+            <div class="project-wrap" :style="{'min-height': (!project.projects) ? '400px' : 'unset'}">
+              <Project :data="project"
+                       :options="options"
+                       @handleCollapse="handleCollapse($event)"/>
+
+              <div class="skeleton" v-if="loading">
+                <!--Skeleton-->
+                <a-skeleton active
+                            :loading="loading"
+                            :title="false"
+                            :paragraph="{ rows: 10 , width: [`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`,`calc(100% - 20px)`]}"></a-skeleton>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="chart-col">
-          <div class="chart__timeline">
-            <Duration :start-date="project.start_time" :type-format="options.date_format"/>
-          </div>
+          <div class="chart-col">
+            <div class="chart__timeline">
+              <Duration :start-date="project.start_time" :type-format="options.date_format"/>
+            </div>
 
-          <div class="chart__wrap">
-            <Chart @clickChart="getCurrentDate"
-                   :data="project" :start-date="project.start_time"
-                   :type-format="options.date_format"
-                   :show-name-project="options.show_name_project"
-                   :show-line="showLine"
-                   :positionLine="positionLine"/>
+            <div class="chart__wrap">
+              <Chart @clickChart="getCurrentDate"
+                     :data="project" :start-date="project.start_time"
+                     :type-format="options.date_format"
+                     :show-name-project="options.show_name_project"
+                     :show-line="showLine"
+                     :positionLine="positionLine"/>
 
-            <SideBar :current-day="currentDay"
-                     :data="dataFilter"
-                     :show-popup="showPopup"
-                     :options="options"
-                     @close="closePopUp"/>
+              <SideBar :current-day="currentDay"
+                       :data="dataFilter"
+                       :show-popup="showPopup"
+                       :options="options"
+                       @close="closePopUp"/>
+
+              <!--Lazyload-->
+              <div class="skeleton" v-if="loading">
+                <!--Skeleton-->
+                <a-skeleton active
+                            :loading="loading"
+                            :title="false"
+                            :paragraph="{ rows: 10 , width: '100%'}"></a-skeleton>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      </a-spin>
     </div>
 </template>
 
@@ -51,6 +66,9 @@ import SideBar from './SideBar.vue';
 import isEmpty from '../helpers';
 import * as moment from "moment";
 import {groupBy} from "lodash";
+import Vue from 'vue'
+import {Skeleton} from 'ant-design-vue'
+Vue.use(Skeleton);
 
 export default {
   name: 'ChartTable',
@@ -89,7 +107,11 @@ export default {
       })
     })
 
-    window.projectChart.$on('loading', (loading) => {
+    window.projectChart.$on('chartLazyLoad', (loading) => {
+      if (loading) {
+        this.project = {}
+      }
+
       this.loading = loading
     })
   },
@@ -160,6 +182,7 @@ export default {
 
   .custom-spin-container {
     overflow: hidden;
+    position: relative;
   }
 
   .table-chart-wrapper {
@@ -242,5 +265,14 @@ export default {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #c1c1c1;
+  }
+
+  .pms-chart__table-container {
+    .skeleton {
+      margin-top: 50px;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
   }
 </style>
